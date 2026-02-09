@@ -1172,6 +1172,139 @@ body {
     color: var(--text);
 }
 
+/* ========== Crash ========== */
+.crash-banner { background: linear-gradient(135deg, #0a1e3d, #1a3a6e); }
+
+.crash-card { padding: 1.5rem; }
+
+.crash-graph-container {
+    position: relative;
+    background: var(--bg-0);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--bg-3);
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+#crash-canvas {
+    display: block;
+    width: 100%;
+    height: 320px;
+}
+
+.crash-multiplier {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-3);
+    pointer-events: none;
+    transition: color 0.2s;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.crash-multiplier.rising {
+    color: var(--accent);
+    text-shadow: 0 0 40px rgba(31, 255, 32, 0.3);
+}
+
+.crash-multiplier.cashed {
+    color: var(--accent);
+    text-shadow: 0 0 40px rgba(31, 255, 32, 0.4);
+}
+
+.crash-multiplier.crashed {
+    color: var(--red);
+    text-shadow: 0 0 40px rgba(237, 66, 69, 0.4);
+    animation: crashShake 0.4s ease;
+}
+
+@keyframes crashShake {
+    0%, 100% { transform: translate(-50%, -50%); }
+    20% { transform: translate(-52%, -48%); }
+    40% { transform: translate(-48%, -52%); }
+    60% { transform: translate(-51%, -49%); }
+    80% { transform: translate(-49%, -51%); }
+}
+
+.crash-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.crash-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.btn-cashout {
+    background: var(--red);
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 1rem;
+    animation: cashoutPulse 1s ease infinite;
+}
+
+.btn-cashout:hover {
+    background: #c0392b;
+}
+
+@keyframes cashoutPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(237, 66, 69, 0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(237, 66, 69, 0); }
+}
+
+.crash-waiting {
+    text-align: center;
+    padding: 1rem;
+    color: var(--text-3);
+    font-weight: 600;
+}
+
+.crash-history {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.crash-hist-item {
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.crash-hist-low {
+    background: rgba(237, 66, 69, 0.15);
+    color: var(--red);
+}
+
+.crash-hist-mid {
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--blue);
+}
+
+.crash-hist-high {
+    background: var(--accent-dim);
+    color: var(--accent);
+}
+
+.crash-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.crash-info p {
+    font-size: 0.8rem;
+    color: var(--text-3);
+    line-height: 1.4;
+}
+
 /* ========== Toast ========== */
 .toast {
     position: fixed;
