@@ -4,298 +4,450 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Royal Flush Casino</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Top Navigation -->
-    <nav id="main-nav" class="hidden">
-        <div class="nav-brand" onclick="navigate('lobby')">Royal Flush Casino</div>
-        <div class="nav-links">
-            <a href="#lobby" class="nav-link" data-page="lobby">Lobby</a>
-            <a href="#wallet" class="nav-link" data-page="wallet">Wallet</a>
-        </div>
-        <div class="nav-right">
-            <span id="nav-balance" class="nav-balance">$0.00</span>
-            <span id="nav-user" class="nav-user"></span>
-            <button id="btn-logout" class="btn btn-sm" onclick="logout()">Logout</button>
-        </div>
-    </nav>
-
-    <!-- Auth Page -->
-    <div id="page-auth" class="page active">
+    <!-- ===== Auth Screen ===== -->
+    <div id="page-auth" class="auth-screen active">
+        <div class="auth-bg"></div>
         <div class="auth-container">
-            <h1 class="casino-title">Royal Flush Casino</h1>
-            <p class="casino-subtitle">Try your luck. Win big.</p>
-            <div class="auth-tabs">
-                <button class="auth-tab active" onclick="showAuthTab('login')">Login</button>
-                <button class="auth-tab" onclick="showAuthTab('register')">Register</button>
-            </div>
-            <form id="form-login" class="auth-form" onsubmit="handleLogin(event)">
-                <input type="text" id="login-username" placeholder="Username" required autocomplete="username">
-                <input type="password" id="login-password" placeholder="Password" required autocomplete="current-password">
-                <button type="submit" class="btn btn-primary btn-full">Login</button>
-                <p id="login-error" class="error-msg"></p>
-            </form>
-            <form id="form-register" class="auth-form hidden" onsubmit="handleRegister(event)">
-                <input type="text" id="reg-username" placeholder="Username" required autocomplete="username">
-                <input type="email" id="reg-email" placeholder="Email" required autocomplete="email">
-                <input type="password" id="reg-password" placeholder="Password" required autocomplete="new-password">
-                <input type="password" id="reg-confirm" placeholder="Confirm Password" required autocomplete="new-password">
-                <button type="submit" class="btn btn-primary btn-full">Create Account</button>
-                <p id="reg-error" class="error-msg"></p>
-            </form>
-        </div>
-    </div>
-
-    <!-- Lobby Page -->
-    <div id="page-lobby" class="page">
-        <div class="lobby">
-            <h2 class="page-title">Choose Your Game</h2>
-            <div class="game-grid">
-                <div class="game-card" onclick="navigate('slots')">
-                    <div class="game-card-icon">🎰</div>
-                    <h3>Slots</h3>
-                    <p>Spin the reels and hit the jackpot!</p>
-                    <span class="game-card-tag">Min $1</span>
+            <div class="auth-logo">ROYAL FLUSH</div>
+            <p class="auth-tagline">The premier online casino experience</p>
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="showAuthTab('login')">Sign In</button>
+                    <button class="auth-tab" onclick="showAuthTab('register')">Register</button>
                 </div>
-                <div class="game-card" onclick="navigate('blackjack')">
-                    <div class="game-card-icon">🃏</div>
-                    <h3>Blackjack</h3>
-                    <p>Beat the dealer to 21!</p>
-                    <span class="game-card-tag">Min $5</span>
-                </div>
-                <div class="game-card" onclick="navigate('roulette')">
-                    <div class="game-card-icon">🎡</div>
-                    <h3>Roulette</h3>
-                    <p>Place your bets and spin the wheel!</p>
-                    <span class="game-card-tag">Min $1</span>
-                </div>
+                <form id="form-login" class="auth-form" onsubmit="handleLogin(event)">
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input type="text" id="login-username" placeholder="Enter username" required autocomplete="username">
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="login-password" placeholder="Enter password" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                    <p id="login-error" class="error-msg"></p>
+                </form>
+                <form id="form-register" class="auth-form hidden" onsubmit="handleRegister(event)">
+                    <div class="input-group">
+                        <label>Username</label>
+                        <input type="text" id="reg-username" placeholder="Choose a username" required autocomplete="username">
+                    </div>
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" id="reg-email" placeholder="Enter email address" required autocomplete="email">
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="reg-password" placeholder="Create password" required autocomplete="new-password">
+                    </div>
+                    <div class="input-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="reg-confirm" placeholder="Repeat password" required autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                    <p id="reg-error" class="error-msg"></p>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- Wallet Page -->
-    <div id="page-wallet" class="page">
-        <div class="wallet-container">
-            <h2 class="page-title">My Wallet</h2>
-            <div class="wallet-balance-card">
-                <span class="wallet-label">Available Balance</span>
-                <span id="wallet-balance" class="wallet-amount">$0.00</span>
+    <!-- ===== Main App Shell ===== -->
+    <div id="app-shell" class="app-shell hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-logo" onclick="navigate('lobby')">
+                <span class="logo-icon">RF</span>
+                <span class="logo-text">Royal Flush</span>
             </div>
-            <div class="wallet-actions">
-                <div class="wallet-action-card">
-                    <h3>Deposit</h3>
-                    <div class="wallet-input-group">
-                        <span class="currency-symbol">$</span>
-                        <input type="number" id="deposit-amount" min="1" step="0.01" placeholder="0.00">
+            <nav class="sidebar-nav">
+                <div class="nav-section-label">Menu</div>
+                <a class="sidebar-link active" data-page="lobby" onclick="navigate('lobby')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span>Lobby</span>
+                </a>
+                <div class="nav-section-label">Games</div>
+                <a class="sidebar-link" data-page="slots" onclick="navigate('slots')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="16" y1="4" x2="16" y2="20"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                    <span>Slots</span>
+                </a>
+                <a class="sidebar-link" data-page="blackjack" onclick="navigate('blackjack')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="13" height="18" rx="2"/><path d="M9.5 8v8M6 12h7"/><rect x="10" y="5" width="11" height="14" rx="2" fill="none" opacity="0.5"/></svg>
+                    <span>Blackjack</span>
+                </a>
+                <a class="sidebar-link" data-page="roulette" onclick="navigate('roulette')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+                    <span>Roulette</span>
+                </a>
+                <div class="nav-section-label">Account</div>
+                <a class="sidebar-link" data-page="wallet" onclick="navigate('wallet')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 12h.01"/></svg>
+                    <span>Wallet</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="user-avatar" id="sidebar-avatar">?</div>
+                    <div class="user-info">
+                        <span id="sidebar-username" class="user-name">User</span>
+                        <span class="user-label">Player</span>
                     </div>
-                    <div class="quick-amounts">
-                        <button class="btn btn-sm" onclick="setDeposit(10)">$10</button>
-                        <button class="btn btn-sm" onclick="setDeposit(25)">$25</button>
-                        <button class="btn btn-sm" onclick="setDeposit(50)">$50</button>
-                        <button class="btn btn-sm" onclick="setDeposit(100)">$100</button>
-                    </div>
-                    <button class="btn btn-primary btn-full" onclick="deposit()">Deposit Funds</button>
-                </div>
-                <div class="wallet-action-card">
-                    <h3>Withdraw</h3>
-                    <div class="wallet-input-group">
-                        <span class="currency-symbol">$</span>
-                        <input type="number" id="withdraw-amount" min="1" step="0.01" placeholder="0.00">
-                    </div>
-                    <button class="btn btn-primary btn-full" onclick="withdraw()">Withdraw Funds</button>
                 </div>
             </div>
-            <div class="transaction-history">
-                <h3>Transaction History</h3>
-                <div id="transaction-list" class="transaction-list">
-                    <p class="empty-msg">No transactions yet.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+        </aside>
 
-    <!-- Slots Page -->
-    <div id="page-slots" class="page">
-        <div class="game-container">
-            <button class="btn btn-back" onclick="navigate('lobby')">&larr; Back to Lobby</button>
-            <h2 class="game-title">Lucky Sevens Slots</h2>
-            <div class="slots-machine">
-                <div class="slots-display">
-                    <div class="slots-row">
-                        <div class="slot-reel" id="reel-0-0">🍒</div>
-                        <div class="slot-reel" id="reel-0-1">🍒</div>
-                        <div class="slot-reel" id="reel-0-2">🍒</div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <div class="topbar-right">
+                    <div class="balance-display">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M16 12h.01"/></svg>
+                        <span id="nav-balance">$0.00</span>
                     </div>
-                    <div class="slots-row slots-row-center">
-                        <div class="slot-reel" id="reel-1-0">7️⃣</div>
-                        <div class="slot-reel" id="reel-1-1">7️⃣</div>
-                        <div class="slot-reel" id="reel-1-2">7️⃣</div>
-                    </div>
-                    <div class="slots-row">
-                        <div class="slot-reel" id="reel-2-0">🍋</div>
-                        <div class="slot-reel" id="reel-2-1">🍋</div>
-                        <div class="slot-reel" id="reel-2-2">🍋</div>
-                    </div>
+                    <button class="btn btn-accent btn-sm" onclick="navigate('wallet')">Deposit</button>
+                    <button class="btn btn-ghost btn-sm" onclick="logout()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    </button>
                 </div>
-                <div class="slots-controls">
-                    <div class="bet-control">
-                        <label>Bet Amount:</label>
-                        <button class="btn btn-sm" onclick="adjustSlotBet(-1)">-</button>
-                        <span id="slot-bet" class="bet-display">$5</span>
-                        <button class="btn btn-sm" onclick="adjustSlotBet(1)">+</button>
-                    </div>
-                    <button id="btn-spin" class="btn btn-primary btn-spin" onclick="spinSlots()">SPIN</button>
-                </div>
-                <div id="slots-result" class="game-result"></div>
-            </div>
-            <div class="paytable">
-                <h3>Paytable (center row)</h3>
-                <div class="paytable-grid">
-                    <div class="paytable-item"><span>7️⃣ 7️⃣ 7️⃣</span><span>50x</span></div>
-                    <div class="paytable-item"><span>💎 💎 💎</span><span>25x</span></div>
-                    <div class="paytable-item"><span>🍒 🍒 🍒</span><span>10x</span></div>
-                    <div class="paytable-item"><span>🍋 🍋 🍋</span><span>5x</span></div>
-                    <div class="paytable-item"><span>🍊 🍊 🍊</span><span>5x</span></div>
-                    <div class="paytable-item"><span>Any 2 match</span><span>2x</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
+            </header>
 
-    <!-- Blackjack Page -->
-    <div id="page-blackjack" class="page">
-        <div class="game-container">
-            <button class="btn btn-back" onclick="navigate('lobby')">&larr; Back to Lobby</button>
-            <h2 class="game-title">Blackjack</h2>
-            <div class="blackjack-table">
-                <div class="bj-dealer-area">
-                    <h3>Dealer <span id="dealer-score" class="hand-score"></span></h3>
-                    <div id="dealer-hand" class="card-hand"></div>
-                </div>
-                <div class="bj-divider"></div>
-                <div class="bj-player-area">
-                    <h3>Your Hand <span id="player-score" class="hand-score"></span></h3>
-                    <div id="player-hand" class="card-hand"></div>
-                </div>
-                <div id="bj-result" class="game-result"></div>
-                <div id="bj-bet-controls" class="bj-controls">
-                    <div class="bet-control">
-                        <label>Bet:</label>
-                        <button class="btn btn-sm" onclick="adjustBjBet(-5)">-</button>
-                        <span id="bj-bet" class="bet-display">$10</span>
-                        <button class="btn btn-sm" onclick="adjustBjBet(5)">+</button>
-                    </div>
-                    <button class="btn btn-primary" onclick="startBlackjack()">Deal</button>
-                </div>
-                <div id="bj-action-controls" class="bj-controls hidden">
-                    <button class="btn btn-primary" onclick="bjHit()">Hit</button>
-                    <button class="btn btn-primary" onclick="bjStand()">Stand</button>
-                    <button id="btn-double" class="btn btn-primary" onclick="bjDouble()">Double Down</button>
-                </div>
-                <div id="bj-continue" class="bj-controls hidden">
-                    <button class="btn btn-primary" onclick="resetBlackjack()">New Hand</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Roulette Page -->
-    <div id="page-roulette" class="page">
-        <div class="game-container">
-            <button class="btn btn-back" onclick="navigate('lobby')">&larr; Back to Lobby</button>
-            <h2 class="game-title">European Roulette</h2>
-            <div class="roulette-game">
-                <div class="roulette-wheel-container">
-                    <div id="roulette-wheel" class="roulette-wheel">
-                        <div class="wheel-inner">
-                            <div id="wheel-ball" class="wheel-ball"></div>
+            <!-- Page: Lobby -->
+            <div id="page-lobby" class="page">
+                <div class="page-inner">
+                    <div class="lobby-hero">
+                        <div class="hero-content">
+                            <h1>Welcome back, <span id="lobby-username">Player</span></h1>
+                            <p>Choose a game and start winning</p>
                         </div>
                     </div>
-                    <div id="roulette-result-display" class="roulette-result-display"></div>
-                </div>
-                <div class="roulette-board">
-                    <div class="board-top">
-                        <div class="board-cell board-zero" data-bet="0" onclick="placeBet(this)">0</div>
-                        <div class="board-numbers">
-                            <!-- Row 1 -->
-                            <div class="board-cell board-red" data-bet="3" onclick="placeBet(this)">3</div>
-                            <div class="board-cell board-black" data-bet="6" onclick="placeBet(this)">6</div>
-                            <div class="board-cell board-red" data-bet="9" onclick="placeBet(this)">9</div>
-                            <div class="board-cell board-red" data-bet="12" onclick="placeBet(this)">12</div>
-                            <div class="board-cell board-black" data-bet="15" onclick="placeBet(this)">15</div>
-                            <div class="board-cell board-red" data-bet="18" onclick="placeBet(this)">18</div>
-                            <div class="board-cell board-red" data-bet="21" onclick="placeBet(this)">21</div>
-                            <div class="board-cell board-black" data-bet="24" onclick="placeBet(this)">24</div>
-                            <div class="board-cell board-red" data-bet="27" onclick="placeBet(this)">27</div>
-                            <div class="board-cell board-red" data-bet="30" onclick="placeBet(this)">30</div>
-                            <div class="board-cell board-black" data-bet="33" onclick="placeBet(this)">33</div>
-                            <div class="board-cell board-red" data-bet="36" onclick="placeBet(this)">36</div>
-                            <div class="board-col-bet" data-bet="col3" onclick="placeBet(this)">2:1</div>
-                            <!-- Row 2 -->
-                            <div class="board-cell board-black" data-bet="2" onclick="placeBet(this)">2</div>
-                            <div class="board-cell board-red" data-bet="5" onclick="placeBet(this)">5</div>
-                            <div class="board-cell board-black" data-bet="8" onclick="placeBet(this)">8</div>
-                            <div class="board-cell board-black" data-bet="11" onclick="placeBet(this)">11</div>
-                            <div class="board-cell board-red" data-bet="14" onclick="placeBet(this)">14</div>
-                            <div class="board-cell board-black" data-bet="17" onclick="placeBet(this)">17</div>
-                            <div class="board-cell board-black" data-bet="20" onclick="placeBet(this)">20</div>
-                            <div class="board-cell board-red" data-bet="23" onclick="placeBet(this)">23</div>
-                            <div class="board-cell board-black" data-bet="26" onclick="placeBet(this)">26</div>
-                            <div class="board-cell board-black" data-bet="29" onclick="placeBet(this)">29</div>
-                            <div class="board-cell board-red" data-bet="32" onclick="placeBet(this)">32</div>
-                            <div class="board-cell board-black" data-bet="35" onclick="placeBet(this)">35</div>
-                            <div class="board-col-bet" data-bet="col2" onclick="placeBet(this)">2:1</div>
-                            <!-- Row 3 -->
-                            <div class="board-cell board-red" data-bet="1" onclick="placeBet(this)">1</div>
-                            <div class="board-cell board-black" data-bet="4" onclick="placeBet(this)">4</div>
-                            <div class="board-cell board-red" data-bet="7" onclick="placeBet(this)">7</div>
-                            <div class="board-cell board-black" data-bet="10" onclick="placeBet(this)">10</div>
-                            <div class="board-cell board-black" data-bet="13" onclick="placeBet(this)">13</div>
-                            <div class="board-cell board-red" data-bet="16" onclick="placeBet(this)">16</div>
-                            <div class="board-cell board-red" data-bet="19" onclick="placeBet(this)">19</div>
-                            <div class="board-cell board-black" data-bet="22" onclick="placeBet(this)">22</div>
-                            <div class="board-cell board-red" data-bet="25" onclick="placeBet(this)">25</div>
-                            <div class="board-cell board-black" data-bet="28" onclick="placeBet(this)">28</div>
-                            <div class="board-cell board-black" data-bet="31" onclick="placeBet(this)">31</div>
-                            <div class="board-cell board-red" data-bet="34" onclick="placeBet(this)">34</div>
-                            <div class="board-col-bet" data-bet="col1" onclick="placeBet(this)">2:1</div>
+                    <div class="section-header">
+                        <h2>Casino Games</h2>
+                        <span class="badge">3 games</span>
+                    </div>
+                    <div class="game-grid">
+                        <div class="game-card" onclick="navigate('slots')">
+                            <div class="game-card-banner slots-banner">
+                                <div class="game-card-icon-wrap">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="16" y1="4" x2="16" y2="20"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                                </div>
+                            </div>
+                            <div class="game-card-body">
+                                <h3>Slots</h3>
+                                <p>Spin the reels and hit the jackpot</p>
+                                <div class="game-card-meta">
+                                    <span class="meta-tag">Min $1</span>
+                                    <span class="meta-tag accent">Up to 50x</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-card" onclick="navigate('blackjack')">
+                            <div class="game-card-banner blackjack-banner">
+                                <div class="game-card-icon-wrap">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="13" height="18" rx="2"/><path d="M9.5 8v8M6 12h7"/><rect x="10" y="5" width="11" height="14" rx="2" fill="none" opacity="0.4"/></svg>
+                                </div>
+                            </div>
+                            <div class="game-card-body">
+                                <h3>Blackjack</h3>
+                                <p>Beat the dealer to 21</p>
+                                <div class="game-card-meta">
+                                    <span class="meta-tag">Min $5</span>
+                                    <span class="meta-tag accent">3:2 Payout</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-card" onclick="navigate('roulette')">
+                            <div class="game-card-banner roulette-banner">
+                                <div class="game-card-icon-wrap">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+                                </div>
+                            </div>
+                            <div class="game-card-body">
+                                <h3>Roulette</h3>
+                                <p>Place your bets and spin the wheel</p>
+                                <div class="game-card-meta">
+                                    <span class="meta-tag">Min $1</span>
+                                    <span class="meta-tag accent">35x Straight</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="board-bottom">
-                        <div class="board-dozen" data-bet="1st12" onclick="placeBet(this)">1st 12</div>
-                        <div class="board-dozen" data-bet="2nd12" onclick="placeBet(this)">2nd 12</div>
-                        <div class="board-dozen" data-bet="3rd12" onclick="placeBet(this)">3rd 12</div>
-                    </div>
-                    <div class="board-outside">
-                        <div class="board-outside-bet" data-bet="1-18" onclick="placeBet(this)">1-18</div>
-                        <div class="board-outside-bet" data-bet="even" onclick="placeBet(this)">Even</div>
-                        <div class="board-outside-bet board-red-chip" data-bet="red" onclick="placeBet(this)">Red</div>
-                        <div class="board-outside-bet board-black-chip" data-bet="black" onclick="placeBet(this)">Black</div>
-                        <div class="board-outside-bet" data-bet="odd" onclick="placeBet(this)">Odd</div>
-                        <div class="board-outside-bet" data-bet="19-36" onclick="placeBet(this)">19-36</div>
-                    </div>
                 </div>
-                <div class="roulette-controls">
-                    <div class="bet-control">
-                        <label>Chip Value:</label>
-                        <button class="btn btn-sm chip-select active" onclick="selectChip(1, this)">$1</button>
-                        <button class="btn btn-sm chip-select" onclick="selectChip(5, this)">$5</button>
-                        <button class="btn btn-sm chip-select" onclick="selectChip(10, this)">$10</button>
-                        <button class="btn btn-sm chip-select" onclick="selectChip(25, this)">$25</button>
-                    </div>
-                    <div class="roulette-bet-info">
-                        <span>Total Bet: <strong id="roulette-total-bet">$0</strong></span>
-                        <button class="btn btn-sm" onclick="clearBets()">Clear Bets</button>
-                    </div>
-                    <button id="btn-roulette-spin" class="btn btn-primary btn-spin" onclick="spinRoulette()">SPIN</button>
-                </div>
-                <div id="roulette-result" class="game-result"></div>
             </div>
-        </div>
+
+            <!-- Page: Wallet -->
+            <div id="page-wallet" class="page">
+                <div class="page-inner">
+                    <h2 class="page-heading">Wallet</h2>
+                    <div class="wallet-grid">
+                        <div class="wallet-card balance-card">
+                            <div class="balance-label">Total Balance</div>
+                            <div id="wallet-balance" class="balance-value">$0.00</div>
+                            <div class="balance-sub">Available for play</div>
+                        </div>
+                        <div class="wallet-card">
+                            <h3>Deposit</h3>
+                            <div class="input-group">
+                                <label>Amount</label>
+                                <div class="input-with-prefix">
+                                    <span class="input-prefix">$</span>
+                                    <input type="number" id="deposit-amount" min="1" step="0.01" placeholder="0.00">
+                                </div>
+                            </div>
+                            <div class="quick-chips">
+                                <button class="chip" onclick="setDeposit(10)">$10</button>
+                                <button class="chip" onclick="setDeposit(25)">$25</button>
+                                <button class="chip" onclick="setDeposit(50)">$50</button>
+                                <button class="chip" onclick="setDeposit(100)">$100</button>
+                                <button class="chip" onclick="setDeposit(500)">$500</button>
+                            </div>
+                            <button class="btn btn-accent btn-full" onclick="deposit()">Deposit</button>
+                        </div>
+                        <div class="wallet-card">
+                            <h3>Withdraw</h3>
+                            <div class="input-group">
+                                <label>Amount</label>
+                                <div class="input-with-prefix">
+                                    <span class="input-prefix">$</span>
+                                    <input type="number" id="withdraw-amount" min="1" step="0.01" placeholder="0.00">
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-full" onclick="withdraw()">Withdraw</button>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top:1.5rem">
+                        <h3 class="card-heading">Transaction History</h3>
+                        <div id="transaction-list" class="transaction-list">
+                            <p class="empty-state">No transactions yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page: Slots -->
+            <div id="page-slots" class="page">
+                <div class="page-inner">
+                    <div class="game-header">
+                        <button class="btn btn-ghost btn-sm" onclick="navigate('lobby')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                            Back
+                        </button>
+                        <h2>Slots</h2>
+                        <div></div>
+                    </div>
+                    <div class="game-layout">
+                        <div class="game-main">
+                            <div class="card slots-card">
+                                <div class="slots-display">
+                                    <div class="slots-viewport">
+                                        <div class="slots-row slots-row-dim">
+                                            <div class="reel" id="reel-0-0">&#x1F352;</div>
+                                            <div class="reel" id="reel-0-1">&#x1F352;</div>
+                                            <div class="reel" id="reel-0-2">&#x1F352;</div>
+                                        </div>
+                                        <div class="slots-payline"></div>
+                                        <div class="slots-row slots-row-main">
+                                            <div class="reel" id="reel-1-0">7&#xFE0F;&#x20E3;</div>
+                                            <div class="reel" id="reel-1-1">7&#xFE0F;&#x20E3;</div>
+                                            <div class="reel" id="reel-1-2">7&#xFE0F;&#x20E3;</div>
+                                        </div>
+                                        <div class="slots-payline"></div>
+                                        <div class="slots-row slots-row-dim">
+                                            <div class="reel" id="reel-2-0">&#x1F34B;</div>
+                                            <div class="reel" id="reel-2-1">&#x1F34B;</div>
+                                            <div class="reel" id="reel-2-2">&#x1F34B;</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="slots-result" class="result-bar"></div>
+                                <div class="game-controls">
+                                    <div class="bet-input-group">
+                                        <label>Bet</label>
+                                        <div class="bet-adjuster">
+                                            <button class="btn btn-ghost btn-icon" onclick="adjustSlotBet(-1)">-</button>
+                                            <span id="slot-bet" class="bet-value">$5</span>
+                                            <button class="btn btn-ghost btn-icon" onclick="adjustSlotBet(1)">+</button>
+                                        </div>
+                                    </div>
+                                    <button id="btn-spin" class="btn btn-accent btn-lg" onclick="spinSlots()">Spin</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="game-sidebar">
+                            <div class="card">
+                                <h3 class="card-heading">Paytable</h3>
+                                <div class="paytable">
+                                    <div class="pt-row"><span>7&#xFE0F;&#x20E3; 7&#xFE0F;&#x20E3; 7&#xFE0F;&#x20E3;</span><span class="pt-payout">50x</span></div>
+                                    <div class="pt-row"><span>&#x1F48E; &#x1F48E; &#x1F48E;</span><span class="pt-payout">25x</span></div>
+                                    <div class="pt-row"><span>&#x1F352; &#x1F352; &#x1F352;</span><span class="pt-payout">10x</span></div>
+                                    <div class="pt-row"><span>&#x1F34B; &#x1F34B; &#x1F34B;</span><span class="pt-payout">5x</span></div>
+                                    <div class="pt-row"><span>&#x1F34A; &#x1F34A; &#x1F34A;</span><span class="pt-payout">5x</span></div>
+                                    <div class="pt-row"><span>&#x1F347; &#x1F347; &#x1F347;</span><span class="pt-payout">5x</span></div>
+                                    <div class="pt-row"><span>Any 2 match</span><span class="pt-payout">2x</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page: Blackjack -->
+            <div id="page-blackjack" class="page">
+                <div class="page-inner">
+                    <div class="game-header">
+                        <button class="btn btn-ghost btn-sm" onclick="navigate('lobby')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                            Back
+                        </button>
+                        <h2>Blackjack</h2>
+                        <div></div>
+                    </div>
+                    <div class="card bj-table">
+                        <div class="bj-area bj-dealer">
+                            <div class="bj-label">Dealer <span id="dealer-score" class="bj-score"></span></div>
+                            <div id="dealer-hand" class="hand"></div>
+                        </div>
+                        <div class="bj-separator"></div>
+                        <div class="bj-area bj-player">
+                            <div class="bj-label">You <span id="player-score" class="bj-score"></span></div>
+                            <div id="player-hand" class="hand"></div>
+                        </div>
+                        <div id="bj-result" class="result-bar"></div>
+                        <div id="bj-bet-controls" class="game-controls">
+                            <div class="bet-input-group">
+                                <label>Bet</label>
+                                <div class="bet-adjuster">
+                                    <button class="btn btn-ghost btn-icon" onclick="adjustBjBet(-5)">-</button>
+                                    <span id="bj-bet" class="bet-value">$10</span>
+                                    <button class="btn btn-ghost btn-icon" onclick="adjustBjBet(5)">+</button>
+                                </div>
+                            </div>
+                            <button class="btn btn-accent btn-lg" onclick="startBlackjack()">Deal</button>
+                        </div>
+                        <div id="bj-action-controls" class="game-controls hidden">
+                            <button class="btn btn-primary" onclick="bjHit()">Hit</button>
+                            <button class="btn btn-primary" onclick="bjStand()">Stand</button>
+                            <button id="btn-double" class="btn btn-outline" onclick="bjDouble()">Double</button>
+                        </div>
+                        <div id="bj-continue" class="game-controls hidden">
+                            <button class="btn btn-accent" onclick="resetBlackjack()">New Hand</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page: Roulette -->
+            <div id="page-roulette" class="page">
+                <div class="page-inner">
+                    <div class="game-header">
+                        <button class="btn btn-ghost btn-sm" onclick="navigate('lobby')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                            Back
+                        </button>
+                        <h2>Roulette</h2>
+                        <div></div>
+                    </div>
+                    <div class="roulette-layout">
+                        <div class="card roulette-main">
+                            <div class="roulette-wheel-area">
+                                <div id="roulette-wheel" class="roulette-wheel">
+                                    <div class="wheel-center">
+                                        <span id="roulette-result-display" class="wheel-number"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="roulette-result" class="result-bar"></div>
+                            <div class="roulette-board">
+                                <div class="board-top">
+                                    <div class="cell cell-zero" data-bet="0" onclick="placeBet(this)">0</div>
+                                    <div class="board-numbers">
+                                        <div class="cell cell-red" data-bet="3" onclick="placeBet(this)">3</div>
+                                        <div class="cell cell-blk" data-bet="6" onclick="placeBet(this)">6</div>
+                                        <div class="cell cell-red" data-bet="9" onclick="placeBet(this)">9</div>
+                                        <div class="cell cell-red" data-bet="12" onclick="placeBet(this)">12</div>
+                                        <div class="cell cell-blk" data-bet="15" onclick="placeBet(this)">15</div>
+                                        <div class="cell cell-red" data-bet="18" onclick="placeBet(this)">18</div>
+                                        <div class="cell cell-red" data-bet="21" onclick="placeBet(this)">21</div>
+                                        <div class="cell cell-blk" data-bet="24" onclick="placeBet(this)">24</div>
+                                        <div class="cell cell-red" data-bet="27" onclick="placeBet(this)">27</div>
+                                        <div class="cell cell-red" data-bet="30" onclick="placeBet(this)">30</div>
+                                        <div class="cell cell-blk" data-bet="33" onclick="placeBet(this)">33</div>
+                                        <div class="cell cell-red" data-bet="36" onclick="placeBet(this)">36</div>
+                                        <div class="cell cell-col" data-bet="col3" onclick="placeBet(this)">2:1</div>
+                                        <div class="cell cell-blk" data-bet="2" onclick="placeBet(this)">2</div>
+                                        <div class="cell cell-red" data-bet="5" onclick="placeBet(this)">5</div>
+                                        <div class="cell cell-blk" data-bet="8" onclick="placeBet(this)">8</div>
+                                        <div class="cell cell-blk" data-bet="11" onclick="placeBet(this)">11</div>
+                                        <div class="cell cell-red" data-bet="14" onclick="placeBet(this)">14</div>
+                                        <div class="cell cell-blk" data-bet="17" onclick="placeBet(this)">17</div>
+                                        <div class="cell cell-blk" data-bet="20" onclick="placeBet(this)">20</div>
+                                        <div class="cell cell-red" data-bet="23" onclick="placeBet(this)">23</div>
+                                        <div class="cell cell-blk" data-bet="26" onclick="placeBet(this)">26</div>
+                                        <div class="cell cell-blk" data-bet="29" onclick="placeBet(this)">29</div>
+                                        <div class="cell cell-red" data-bet="32" onclick="placeBet(this)">32</div>
+                                        <div class="cell cell-blk" data-bet="35" onclick="placeBet(this)">35</div>
+                                        <div class="cell cell-col" data-bet="col2" onclick="placeBet(this)">2:1</div>
+                                        <div class="cell cell-red" data-bet="1" onclick="placeBet(this)">1</div>
+                                        <div class="cell cell-blk" data-bet="4" onclick="placeBet(this)">4</div>
+                                        <div class="cell cell-red" data-bet="7" onclick="placeBet(this)">7</div>
+                                        <div class="cell cell-blk" data-bet="10" onclick="placeBet(this)">10</div>
+                                        <div class="cell cell-blk" data-bet="13" onclick="placeBet(this)">13</div>
+                                        <div class="cell cell-red" data-bet="16" onclick="placeBet(this)">16</div>
+                                        <div class="cell cell-red" data-bet="19" onclick="placeBet(this)">19</div>
+                                        <div class="cell cell-blk" data-bet="22" onclick="placeBet(this)">22</div>
+                                        <div class="cell cell-red" data-bet="25" onclick="placeBet(this)">25</div>
+                                        <div class="cell cell-blk" data-bet="28" onclick="placeBet(this)">28</div>
+                                        <div class="cell cell-blk" data-bet="31" onclick="placeBet(this)">31</div>
+                                        <div class="cell cell-red" data-bet="34" onclick="placeBet(this)">34</div>
+                                        <div class="cell cell-col" data-bet="col1" onclick="placeBet(this)">2:1</div>
+                                    </div>
+                                </div>
+                                <div class="board-dozens">
+                                    <div class="cell cell-out" data-bet="1st12" onclick="placeBet(this)">1st 12</div>
+                                    <div class="cell cell-out" data-bet="2nd12" onclick="placeBet(this)">2nd 12</div>
+                                    <div class="cell cell-out" data-bet="3rd12" onclick="placeBet(this)">3rd 12</div>
+                                </div>
+                                <div class="board-outside">
+                                    <div class="cell cell-out" data-bet="1-18" onclick="placeBet(this)">1-18</div>
+                                    <div class="cell cell-out" data-bet="even" onclick="placeBet(this)">Even</div>
+                                    <div class="cell cell-out cell-r" data-bet="red" onclick="placeBet(this)">Red</div>
+                                    <div class="cell cell-out cell-b" data-bet="black" onclick="placeBet(this)">Black</div>
+                                    <div class="cell cell-out" data-bet="odd" onclick="placeBet(this)">Odd</div>
+                                    <div class="cell cell-out" data-bet="19-36" onclick="placeBet(this)">19-36</div>
+                                </div>
+                            </div>
+                            <div class="roulette-controls">
+                                <div class="chip-selector">
+                                    <label>Chip</label>
+                                    <div class="chip-options">
+                                        <button class="chip-btn active" onclick="selectChip(1,this)">$1</button>
+                                        <button class="chip-btn" onclick="selectChip(5,this)">$5</button>
+                                        <button class="chip-btn" onclick="selectChip(10,this)">$10</button>
+                                        <button class="chip-btn" onclick="selectChip(25,this)">$25</button>
+                                    </div>
+                                </div>
+                                <div class="roulette-actions">
+                                    <div class="bet-total">Total: <strong id="roulette-total-bet">$0</strong></div>
+                                    <button class="btn btn-ghost btn-sm" onclick="clearBets()">Clear</button>
+                                    <button id="btn-roulette-spin" class="btn btn-accent btn-lg" onclick="spinRoulette()">Spin</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <!-- Toast notification -->
+    <!-- Toast -->
     <div id="toast" class="toast"></div>
 
     <script src="js/app.js"></script>

@@ -16,7 +16,7 @@ let wheelRotation = 0;
 
 function selectChip(value, el) {
     selectedChip = value;
-    document.querySelectorAll('.chip-select').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.chip-btn').forEach(btn => btn.classList.remove('active'));
     if (el) el.classList.add('active');
 }
 
@@ -47,7 +47,7 @@ function placeBet(cell) {
 function clearBets() {
     if (isRouletteSpinning) return;
     rouletteBets = [];
-    document.querySelectorAll('.board-cell.selected, .board-dozen.selected, .board-outside-bet.selected, .board-col-bet.selected').forEach(el => {
+    document.querySelectorAll('.cell.selected').forEach(el => {
         el.classList.remove('selected');
     });
     updateRouletteBetDisplay();
@@ -94,7 +94,7 @@ function spinRoulette() {
     wheel.style.transform = `rotate(${wheelRotation}deg)`;
 
     document.getElementById('roulette-result').textContent = '';
-    document.getElementById('roulette-result').className = 'game-result';
+    document.getElementById('roulette-result').className = 'result-bar';
     document.getElementById('roulette-result-display').textContent = '';
 
     setTimeout(() => {
@@ -120,12 +120,12 @@ function spinRoulette() {
             setBalance(getBalance() + totalWin);
             addTransaction('Roulette Win', netWin);
             resultEl.textContent = `${resultNumber} ${color.toUpperCase()} - You win ${formatMoney(totalWin)}!`;
-            resultEl.className = 'game-result win';
+            resultEl.className = 'result-bar win';
             showToast('Winner! +' + formatMoney(netWin), 'success');
         } else {
             addTransaction('Roulette Loss', -totalBet);
             resultEl.textContent = `${resultNumber} ${color.toUpperCase()} - No win this time.`;
-            resultEl.className = 'game-result lose';
+            resultEl.className = 'result-bar lose';
         }
 
         // Reset for next spin

@@ -34,7 +34,7 @@ function spinSlots() {
     setBalance(balance - slotBet);
     document.getElementById('btn-spin').disabled = true;
     document.getElementById('slots-result').textContent = '';
-    document.getElementById('slots-result').className = 'game-result';
+    document.getElementById('slots-result').className = 'result-bar';
 
     // Generate all 3x3 symbols
     const grid = [];
@@ -111,17 +111,17 @@ function calculateSlotResult(grid) {
         setBalance(getBalance() + winAmount);
         addTransaction('Slots Win', winAmount);
         resultEl.textContent = 'YOU WIN ' + formatMoney(winAmount) + '!';
-        resultEl.className = 'game-result win';
+        resultEl.className = 'result-bar win';
         showToast('Winner! +' + formatMoney(winAmount), 'success');
     } else {
         addTransaction('Slots Loss', -slotBet);
         resultEl.textContent = 'No luck this time. Try again!';
-        resultEl.className = 'game-result lose';
+        resultEl.className = 'result-bar lose';
     }
 
     // Clean up
     setTimeout(() => {
-        document.querySelectorAll('.slot-reel.winner').forEach(r => r.classList.remove('winner'));
+        document.querySelectorAll('.reel.winner').forEach(r => r.classList.remove('winner'));
     }, 2000);
 
     isSpinning = false;

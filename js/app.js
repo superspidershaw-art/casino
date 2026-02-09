@@ -2,21 +2,16 @@
    Royal Flush Casino - Core App Logic
    ======================================== */
 
-// ===== State =====
 let currentUser = null;
 
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
-    // Check for existing session
     const savedUser = sessionStorage.getItem('casino_user');
     if (savedUser) {
         currentUser = savedUser;
         showApp();
     }
-
-    // Handle hash routing
     window.addEventListener('hashchange', handleRoute);
-    handleRoute();
 });
 
 // ===== Routing =====
@@ -35,17 +30,40 @@ function handleRoute() {
         return;
     }
 
-    // Hide all pages, show target
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Switch pages
+    document.querySelectorAll('.main-content .page').forEach(p => p.classList.remove('active'));
     const target = document.getElementById('page-' + hash);
-    if (target) {
-        target.classList.add('active');
-    }
+    if (target) target.classList.add('active');
 
-    // Update nav links
-    document.querySelectorAll('.nav-link').forEach(link => {
+    // Update sidebar active link
+    document.querySelectorAll('.sidebar-link').forEach(link => {
         link.classList.toggle('active', link.dataset.page === hash);
     });
+
+    // Close mobile sidebar on navigate
+    closeSidebar();
+}
+
+// ===== Sidebar =====
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+
+    let overlay = document.querySelector('.sidebar-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        overlay.onclick = closeSidebar;
+        document.body.appendChild(overlay);
+    }
+    overlay.classList.toggle('show', sidebar.classList.contains('open'));
+}
+
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.remove('open');
+    const overlay = document.querySelector('.sidebar-overlay');
+    if (overlay) overlay.classList.remove('show');
 }
 
 // ===== Auth =====
@@ -60,7 +78,6 @@ function showAuthTab(tab) {
         document.querySelectorAll('.auth-tab')[1].classList.add('active');
     }
 
-    // Clear errors
     document.getElementById('login-error').textContent = '';
     document.getElementById('reg-error').textContent = '';
 }
@@ -69,14 +86,12 @@ function handleLogin(e) {
     e.preventDefault();
     const username = document.getElementById('login-username').value.trim();
     const password = document.getElementById('login-password').value;
-
     const users = JSON.parse(localStorage.getItem('casino_users') || '{}');
 
     if (!users[username]) {
         document.getElementById('login-error').textContent = 'User not found.';
         return;
     }
-
     if (users[username].password !== password) {
         document.getElementById('login-error').textContent = 'Incorrect password.';
         return;
@@ -98,34 +113,28 @@ function handleRegister(e) {
         document.getElementById('reg-error').textContent = 'Username must be at least 3 characters.';
         return;
     }
-
     if (password.length < 4) {
         document.getElementById('reg-error').textContent = 'Password must be at least 4 characters.';
         return;
     }
-
     if (password !== confirm) {
         document.getElementById('reg-error').textContent = 'Passwords do not match.';
         return;
     }
 
     const users = JSON.parse(localStorage.getItem('casino_users') || '{}');
-
     if (users[username]) {
         document.getElementById('reg-error').textContent = 'Username already taken.';
         return;
     }
 
-    // Create user
     users[username] = { email, password };
     localStorage.setItem('casino_users', JSON.stringify(users));
 
-    // Initialize wallet with $100 welcome bonus
     const wallets = JSON.parse(localStorage.getItem('casino_wallets') || '{}');
     wallets[username] = { balance: 100 };
     localStorage.setItem('casino_wallets', JSON.stringify(wallets));
 
-    // Initialize transaction history
     const transactions = JSON.parse(localStorage.getItem('casino_transactions') || '{}');
     transactions[username] = [
         { type: 'Welcome Bonus', amount: 100, date: new Date().toISOString() }
@@ -142,24 +151,28 @@ function logout() {
     currentUser = null;
     sessionStorage.removeItem('casino_user');
 
-    // Hide nav, show auth
-    document.getElementById('main-nav').classList.add('hidden');
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('app-shell').classList.add('hidden');
     document.getElementById('page-auth').classList.add('active');
+    document.querySelectorAll('.main-content .page').forEach(p => p.classList.remove('active'));
 
-    // Clear forms
     document.getElementById('form-login').reset();
     document.getElementById('form-register').reset();
     window.location.hash = '';
 }
 
 function showApp() {
-    // Show nav
-    document.getElementById('main-nav').classList.remove('hidden');
-    document.getElementById('nav-user').textContent = currentUser;
-
-    // Hide auth, show lobby
+    // Hide auth, show app shell
     document.getElementById('page-auth').classList.remove('active');
+    document.getElementById('app-shell').classList.remove('hidden');
+
+    // Update user displays
+    const initial = currentUser.charAt(0).toUpperCase();
+    document.getElementById('sidebar-avatar').textContent = initial;
+    document.getElementById('sidebar-username').textContent = currentUser;
+
+    const lobbyName = document.getElementById('lobby-username');
+    if (lobbyName) lobbyName.textContent = currentUser;
+
     updateBalanceDisplay();
     navigate('lobby');
 }
@@ -182,7 +195,6 @@ function updateBalanceDisplay() {
     const balance = getBalance();
     const formatted = '$' + balance.toFixed(2);
     document.getElementById('nav-balance').textContent = formatted;
-
     const walletEl = document.getElementById('wallet-balance');
     if (walletEl) walletEl.textContent = formatted;
 }
@@ -195,7 +207,6 @@ function addTransaction(type, amount) {
         amount,
         date: new Date().toISOString()
     });
-    // Keep last 50 transactions
     transactions[currentUser] = transactions[currentUser].slice(0, 50);
     localStorage.setItem('casino_transactions', JSON.stringify(transactions));
 }
@@ -212,7 +223,6 @@ function showToast(message, type = '') {
     }, 3000);
 }
 
-// ===== Utility =====
 function formatMoney(amount) {
     return '$' + amount.toFixed(2);
 }

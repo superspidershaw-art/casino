@@ -115,7 +115,7 @@ function startBlackjack() {
     bjGameActive = true;
 
     document.getElementById('bj-result').textContent = '';
-    document.getElementById('bj-result').className = 'game-result';
+    document.getElementById('bj-result').className = 'result-bar';
 
     // Deal initial cards
     playerHand.push(bjDeck.pop());
@@ -241,26 +241,26 @@ function endBlackjack(result) {
         case 'blackjack':
             winAmount = actualBet * 2.5; // 3:2 payout
             resultEl.textContent = 'BLACKJACK! You win ' + formatMoney(winAmount) + '!';
-            resultEl.className = 'game-result win';
+            resultEl.className = 'result-bar win';
             break;
         case 'win':
         case 'dealer-bust':
             winAmount = actualBet * 2;
             resultEl.textContent = (result === 'dealer-bust' ? 'Dealer busts! ' : '') + 'You win ' + formatMoney(winAmount) + '!';
-            resultEl.className = 'game-result win';
+            resultEl.className = 'result-bar win';
             break;
         case 'push':
             winAmount = actualBet; // Return bet
             resultEl.textContent = 'Push! Bet returned.';
-            resultEl.className = 'game-result push';
+            resultEl.className = 'result-bar push';
             break;
         case 'bust':
             resultEl.textContent = 'Bust! You went over 21.';
-            resultEl.className = 'game-result lose';
+            resultEl.className = 'result-bar lose';
             break;
         case 'lose':
             resultEl.textContent = 'Dealer wins with ' + cardValue(dealerHand) + '.';
-            resultEl.className = 'game-result lose';
+            resultEl.className = 'result-bar lose';
             break;
     }
 
@@ -280,7 +280,7 @@ function resetBlackjack() {
     document.getElementById('bj-action-controls').classList.add('hidden');
     document.getElementById('bj-continue').classList.add('hidden');
     document.getElementById('bj-result').textContent = '';
-    document.getElementById('bj-result').className = 'game-result';
+    document.getElementById('bj-result').className = 'result-bar';
     document.getElementById('dealer-hand').innerHTML = '';
     document.getElementById('player-hand').innerHTML = '';
     document.getElementById('dealer-score').textContent = '';
