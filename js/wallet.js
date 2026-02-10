@@ -15,8 +15,8 @@ function deposit() {
         return;
     }
 
-    if (amount > 10000) {
-        showToast('Maximum deposit is $10,000.', 'error');
+    if (amount > 10000000) {
+        showToast('Maximum deposit is $10,000,000.', 'error');
         return;
     }
 

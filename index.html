@@ -6,7 +6,7 @@
     <title>Royal Flush Casino</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -146,10 +146,10 @@
                             </div>
                             <div class="game-card-body">
                                 <h3>Slots</h3>
-                                <p>Spin the reels and hit the jackpot</p>
+                                <p>5-reel, 20 paylines with Wilds &amp; Free Spins</p>
                                 <div class="game-card-meta">
-                                    <span class="meta-tag">Min $1</span>
-                                    <span class="meta-tag accent">Up to 50x</span>
+                                    <span class="meta-tag">20 Lines</span>
+                                    <span class="meta-tag accent">Up to 500x</span>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +163,7 @@
                                 <h3>Blackjack</h3>
                                 <p>Beat the dealer to 21</p>
                                 <div class="game-card-meta">
-                                    <span class="meta-tag">Min $5</span>
+                                    <span class="meta-tag">Custom Bets</span>
                                     <span class="meta-tag accent">3:2 Payout</span>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@
                                 <h3>Roulette</h3>
                                 <p>Place your bets and spin the wheel</p>
                                 <div class="game-card-meta">
-                                    <span class="meta-tag">Min $1</span>
+                                    <span class="meta-tag">European</span>
                                     <span class="meta-tag accent">35x Straight</span>
                                 </div>
                             </div>
@@ -193,7 +193,7 @@
                                 <h3>Crash</h3>
                                 <p>Cash out before the multiplier crashes</p>
                                 <div class="game-card-meta">
-                                    <span class="meta-tag">Min $1</span>
+                                    <span class="meta-tag">Custom Bets</span>
                                     <span class="meta-tag accent">No limit</span>
                                 </div>
                             </div>
@@ -260,43 +260,36 @@
                             Back
                         </button>
                         <h2>Slots</h2>
-                        <div></div>
+                        <div id="free-spins-display" class="free-spins-badge hidden">Free Spins: 0</div>
                     </div>
                     <div class="game-layout">
                         <div class="game-main">
                             <div class="card slots-card">
                                 <div class="slots-display">
-                                    <div class="slots-viewport">
-                                        <div class="slots-row slots-row-dim">
-                                            <div class="reel" id="reel-0-0">&#x1F352;</div>
-                                            <div class="reel" id="reel-0-1">&#x1F352;</div>
-                                            <div class="reel" id="reel-0-2">&#x1F352;</div>
-                                        </div>
-                                        <div class="slots-payline"></div>
-                                        <div class="slots-row slots-row-main">
-                                            <div class="reel" id="reel-1-0">7&#xFE0F;&#x20E3;</div>
-                                            <div class="reel" id="reel-1-1">7&#xFE0F;&#x20E3;</div>
-                                            <div class="reel" id="reel-1-2">7&#xFE0F;&#x20E3;</div>
-                                        </div>
-                                        <div class="slots-payline"></div>
-                                        <div class="slots-row slots-row-dim">
-                                            <div class="reel" id="reel-2-0">&#x1F34B;</div>
-                                            <div class="reel" id="reel-2-1">&#x1F34B;</div>
-                                            <div class="reel" id="reel-2-2">&#x1F34B;</div>
-                                        </div>
-                                    </div>
+                                    <div id="slots-viewport" class="slots-viewport"></div>
                                 </div>
                                 <div id="slots-result" class="result-bar"></div>
-                                <div class="game-controls">
-                                    <div class="bet-input-group">
-                                        <label>Bet</label>
-                                        <div class="bet-adjuster">
-                                            <button class="btn btn-ghost btn-icon" onclick="adjustSlotBet(-1)">-</button>
-                                            <span id="slot-bet" class="bet-value">$5</span>
-                                            <button class="btn btn-ghost btn-icon" onclick="adjustSlotBet(1)">+</button>
+                                <div class="game-controls slots-controls">
+                                    <div class="bet-control-group">
+                                        <label>Bet Per Line</label>
+                                        <div class="bet-input-row">
+                                            <button class="btn btn-ghost btn-icon" onclick="halveSlotBet()" title="Half">&frac12;</button>
+                                            <div class="bet-input-wrap">
+                                                <span class="bet-prefix">$</span>
+                                                <input type="number" id="slot-bet-input" class="bet-input" value="1" min="0.05" step="0.01">
+                                            </div>
+                                            <button class="btn btn-ghost btn-icon" onclick="doubleSlotBet()" title="Double">2x</button>
+                                            <button class="btn btn-ghost btn-icon btn-max" onclick="maxSlotBet()" title="Max Bet">Max</button>
+                                        </div>
+                                        <div class="bet-info">
+                                            <span>20 Lines</span>
+                                            <span>Total: <strong id="slot-total-bet">$20.00</strong></span>
                                         </div>
                                     </div>
-                                    <button id="btn-spin" class="btn btn-accent btn-lg" onclick="spinSlots()">Spin</button>
+                                    <div class="spin-buttons">
+                                        <button id="btn-spin" class="btn btn-accent btn-lg" onclick="spinSlots()">Spin</button>
+                                        <button id="btn-auto-spin" class="btn btn-outline btn-sm" onclick="toggleAutoSpin()">Auto</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -304,13 +297,18 @@
                             <div class="card">
                                 <h3 class="card-heading">Paytable</h3>
                                 <div class="paytable">
-                                    <div class="pt-row"><span>7&#xFE0F;&#x20E3; 7&#xFE0F;&#x20E3; 7&#xFE0F;&#x20E3;</span><span class="pt-payout">50x</span></div>
-                                    <div class="pt-row"><span>&#x1F48E; &#x1F48E; &#x1F48E;</span><span class="pt-payout">25x</span></div>
-                                    <div class="pt-row"><span>&#x1F352; &#x1F352; &#x1F352;</span><span class="pt-payout">10x</span></div>
-                                    <div class="pt-row"><span>&#x1F34B; &#x1F34B; &#x1F34B;</span><span class="pt-payout">5x</span></div>
-                                    <div class="pt-row"><span>&#x1F34A; &#x1F34A; &#x1F34A;</span><span class="pt-payout">5x</span></div>
-                                    <div class="pt-row"><span>&#x1F347; &#x1F347; &#x1F347;</span><span class="pt-payout">5x</span></div>
-                                    <div class="pt-row"><span>Any 2 match</span><span class="pt-payout">2x</span></div>
+                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#ffd700,#ff8c00)">W</span><span class="pt-label">WILD</span><span class="pt-payout">500x</span></div>
+                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#ff1744,#d50000)">7</span><span class="pt-label">Seven</span><span class="pt-payout">300x</span></div>
+                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#00e5ff,#0091ea)">&diams;</span><span class="pt-label">Diamond</span><span class="pt-payout">250x</span></div>
+                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#ffd740,#ff6f00)">&clubs;</span><span class="pt-label">Crown</span><span class="pt-payout">200x</span></div>
+                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#69f0ae,#00c853)">&hearts;</span><span class="pt-label">Bell</span><span class="pt-payout">150x</span></div>
+                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#ff5252,#d32f2f)">&hearts;</span><span class="pt-label">Cherry</span><span class="pt-payout">100x</span></div>
+                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#e040fb,#7c4dff)">S</span><span class="pt-label">SCATTER</span><span class="pt-payout">Free Spins</span></div>
+                                </div>
+                                <div class="pt-note">
+                                    <p>3+ Scatters = Free Spins (10/15/25)</p>
+                                    <p>WILD substitutes all except SCATTER</p>
+                                    <p>Payouts shown for 5 of a kind</p>
                                 </div>
                             </div>
                         </div>
@@ -341,12 +339,16 @@
                         </div>
                         <div id="bj-result" class="result-bar"></div>
                         <div id="bj-bet-controls" class="game-controls">
-                            <div class="bet-input-group">
-                                <label>Bet</label>
-                                <div class="bet-adjuster">
-                                    <button class="btn btn-ghost btn-icon" onclick="adjustBjBet(-5)">-</button>
-                                    <span id="bj-bet" class="bet-value">$10</span>
-                                    <button class="btn btn-ghost btn-icon" onclick="adjustBjBet(5)">+</button>
+                            <div class="bet-control-group">
+                                <label>Bet Amount</label>
+                                <div class="bet-input-row">
+                                    <button class="btn btn-ghost btn-icon" onclick="halveBjBet()" title="Half">&frac12;</button>
+                                    <div class="bet-input-wrap">
+                                        <span class="bet-prefix">$</span>
+                                        <input type="number" id="bj-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setBjBet(this.value)">
+                                    </div>
+                                    <button class="btn btn-ghost btn-icon" onclick="doubleBjBet()" title="Double">2x</button>
+                                    <button class="btn btn-ghost btn-icon btn-max" onclick="maxBjBet()" title="Max Bet">Max</button>
                                 </div>
                             </div>
                             <button class="btn btn-accent btn-lg" onclick="startBlackjack()">Deal</button>
@@ -451,6 +453,8 @@
                                         <button class="chip-btn" onclick="selectChip(5,this)">$5</button>
                                         <button class="chip-btn" onclick="selectChip(10,this)">$10</button>
                                         <button class="chip-btn" onclick="selectChip(25,this)">$25</button>
+                                        <button class="chip-btn" onclick="selectChip(100,this)">$100</button>
+                                        <button class="chip-btn" onclick="selectChip(500,this)">$500</button>
                                     </div>
                                 </div>
                                 <div class="roulette-actions">

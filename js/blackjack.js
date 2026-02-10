@@ -12,9 +12,34 @@ let playerHand = [];
 let dealerHand = [];
 let bjGameActive = false;
 
-function adjustBjBet(delta) {
-    bjBet = Math.max(5, Math.min(500, bjBet + delta));
-    document.getElementById('bj-bet').textContent = '$' + bjBet;
+function setBjBet(amount) {
+    const val = parseFloat(amount);
+    if (!val || val < 1) {
+        bjBet = 1;
+    } else if (val > 100000) {
+        bjBet = 100000;
+    } else {
+        bjBet = Math.round(val * 100) / 100;
+    }
+    const input = document.getElementById('bj-bet-input');
+    if (input && document.activeElement !== input) {
+        input.value = bjBet;
+    }
+}
+
+function halveBjBet() {
+    setBjBet(bjBet / 2);
+    document.getElementById('bj-bet-input').value = bjBet;
+}
+
+function doubleBjBet() {
+    setBjBet(bjBet * 2);
+    document.getElementById('bj-bet-input').value = bjBet;
+}
+
+function maxBjBet() {
+    setBjBet(Math.min(getBalance(), 100000));
+    document.getElementById('bj-bet-input').value = bjBet;
 }
 
 function createDeck() {
