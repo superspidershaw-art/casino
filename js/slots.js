@@ -94,8 +94,6 @@ function setSlotBet(amount) {
     const val = parseFloat(amount);
     if (!val || val < 0.05) {
         slotBet = 0.05;
-    } else if (val > 10000) {
-        slotBet = 10000;
     } else {
         slotBet = Math.round(val * 100) / 100;
     }
@@ -119,7 +117,7 @@ function doubleSlotBet() {
 
 function maxSlotBet() {
     const maxFromBalance = Math.floor(getBalance() / 20 * 100) / 100;
-    setSlotBet(Math.min(maxFromBalance, 10000));
+    setSlotBet(maxFromBalance);
     document.getElementById('slot-bet-input').value = slotBet;
 }
 
@@ -450,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
         betInput.addEventListener('input', () => {
             const val = parseFloat(betInput.value);
             if (val && val > 0) {
-                slotBet = Math.min(val, 10000);
+                slotBet = val;
                 totalBet = Math.round(slotBet * 20 * 100) / 100;
                 document.getElementById('slot-total-bet').textContent = formatMoney(totalBet);
             }

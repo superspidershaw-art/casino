@@ -15,11 +15,6 @@ function deposit() {
         return;
     }
 
-    if (amount > 10000000) {
-        showToast('Maximum deposit is $10,000,000.', 'error');
-        return;
-    }
-
     const newBalance = getBalance() + amount;
     setBalance(newBalance);
     addTransaction('Deposit', amount);

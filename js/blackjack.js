@@ -16,8 +16,6 @@ function setBjBet(amount) {
     const val = parseFloat(amount);
     if (!val || val < 1) {
         bjBet = 1;
-    } else if (val > 100000) {
-        bjBet = 100000;
     } else {
         bjBet = Math.round(val * 100) / 100;
     }

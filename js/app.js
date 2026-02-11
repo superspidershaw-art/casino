@@ -23,7 +23,7 @@ function handleRoute() {
     if (!currentUser) return;
 
     const hash = window.location.hash.slice(1) || 'lobby';
-    const validPages = ['lobby', 'slots', 'blackjack', 'roulette', 'crash', 'wallet'];
+    const validPages = ['lobby', 'slots', 'blackjack', 'roulette', 'crash', 'mines', 'plinko', 'dice', 'baccarat', 'poker', 'wallet'];
 
     if (!validPages.includes(hash)) {
         navigate('lobby');
