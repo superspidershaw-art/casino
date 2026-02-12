@@ -226,3 +226,47 @@ function showToast(message, type = '') {
 function formatMoney(amount) {
     return '$' + amount.toFixed(2);
 }
+
+// ===== Live Player Counts =====
+let totalPlayersBase = 2847;
+let totalPaidBase = 12847392;
+let biggestWinBase = 48290;
+
+function updatePlayerCounts() {
+    // Update each game card player count
+    document.querySelectorAll('.players-tag[data-base]').forEach(tag => {
+        const base = parseInt(tag.dataset.base);
+        const range = Math.max(Math.floor(base * 0.08), 3);
+        const delta = Math.floor(Math.random() * range * 2) - range;
+        const newCount = Math.max(10, base + delta);
+        tag.dataset.base = newCount;
+        const countEl = tag.querySelector('.player-count');
+        if (countEl) countEl.textContent = newCount.toLocaleString();
+    });
+
+    // Update ticker
+    const tickerPlayers = document.getElementById('ticker-players');
+    if (tickerPlayers) {
+        totalPlayersBase += Math.floor(Math.random() * 30) - 15;
+        totalPlayersBase = Math.max(1800, totalPlayersBase);
+        tickerPlayers.textContent = totalPlayersBase.toLocaleString();
+    }
+}
+
+function updateTickerStats() {
+    totalPaidBase += Math.floor(Math.random() * 5000) + 200;
+    const paidEl = document.querySelector('.stats-ticker .ticker-green');
+    if (paidEl) paidEl.textContent = '$' + totalPaidBase.toLocaleString();
+
+    if (Math.random() < 0.15) {
+        biggestWinBase = Math.floor(Math.random() * 80000) + 5000;
+        const winEl = document.querySelector('.stats-ticker .ticker-gold');
+        if (winEl) winEl.textContent = '$' + biggestWinBase.toLocaleString();
+    }
+}
+
+// Start live updates when app loads
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(updatePlayerCounts, 3000);
+    setInterval(updateTickerStats, 5000);
+});

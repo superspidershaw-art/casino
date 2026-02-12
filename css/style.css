@@ -2203,7 +2203,35 @@ body {
     color: var(--blue);
 }
 
-/* ========== Slot Card Emoji ========== */
+/* ========== Slot Card Icon ========== */
+.slot-card-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    z-index: 1;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover .slot-card-icon {
+    transform: scale(1.1);
+}
+
+.slot-icon-main {
+    font-size: 3.5rem;
+    line-height: 1;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.slot-icon-sub {
+    font-size: 1.1rem;
+    letter-spacing: 6px;
+    opacity: 0.8;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
 .slot-card-emoji {
     font-size: 3.5rem;
     text-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
@@ -2270,6 +2298,11 @@ body {
 
 .players-tag svg {
     opacity: 0.7;
+}
+
+.player-count {
+    transition: opacity 0.2s;
+    font-variant-numeric: tabular-nums;
 }
 
 /* ========== Slot Game Info Panel ========== */
