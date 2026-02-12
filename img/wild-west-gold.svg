@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="ww-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3e2723"/>
+      <stop offset="50%" stop-color="#5d4037"/>
+      <stop offset="100%" stop-color="#3e2723"/>
+    </linearGradient>
+    <linearGradient id="ww-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="50%" stop-color="#ffec80"/>
+      <stop offset="100%" stop-color="#c8960c"/>
+    </linearGradient>
+    <linearGradient id="ww-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6b00"/>
+      <stop offset="50%" stop-color="#ff8c42"/>
+      <stop offset="100%" stop-color="#5d4037"/>
+    </linearGradient>
+    <linearGradient id="ww-hat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B7355"/>
+      <stop offset="100%" stop-color="#5C4033"/>
+    </linearGradient>
+    <filter id="ww-glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="ww-sun-glow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="300" fill="url(#ww-bg)"/>
+  <!-- Sunset sky -->
+  <rect width="400" height="120" fill="url(#ww-sky)" opacity="0.4"/>
+  <!-- Sun -->
+  <circle cx="200" cy="50" r="30" fill="#ff8c42" opacity="0.6" filter="url(#ww-sun-glow)"/>
+  <circle cx="200" cy="50" r="18" fill="#ffd700" opacity="0.5"/>
+  <!-- Desert mountains -->
+  <polygon points="0,150 60,80 120,150" fill="#4a3520" opacity="0.5"/>
+  <polygon points="80,150 160,65 240,150" fill="#3e2920" opacity="0.4"/>
+  <polygon points="200,150 300,70 400,150" fill="#4a3520" opacity="0.5"/>
+  <!-- Ground -->
+  <rect y="200" width="400" height="100" fill="#3a2515" opacity="0.5"/>
+  <!-- Cacti -->
+  <g transform="translate(60, 180)" opacity="0.6">
+    <rect x="-4" y="-40" width="8" height="50" rx="4" fill="#2d5016"/>
+    <rect x="4" y="-30" width="20" height="6" rx="3" fill="#2d5016"/>
+    <rect x="20" y="-35" width="6" height="15" rx="3" fill="#2d5016"/>
+    <rect x="-24" y="-25" width="20" height="6" rx="3" fill="#2d5016"/>
+    <rect x="-28" y="-30" width="6" height="15" rx="3" fill="#2d5016"/>
+  </g>
+  <g transform="translate(340, 185)" opacity="0.5">
+    <rect x="-3" y="-30" width="6" height="40" rx="3" fill="#2d5016"/>
+    <rect x="3" y="-22" width="15" height="5" rx="2.5" fill="#2d5016"/>
+    <rect x="15" y="-27" width="5" height="12" rx="2.5" fill="#2d5016"/>
+  </g>
+  <!-- Cowboy hat center -->
+  <g transform="translate(200, 140)" filter="url(#ww-glow)">
+    <!-- Hat brim -->
+    <ellipse cx="0" cy="10" rx="55" ry="12" fill="url(#ww-hat)"/>
+    <ellipse cx="0" cy="8" rx="55" ry="12" fill="#9B8365" opacity="0.5"/>
+    <!-- Hat crown -->
+    <path d="M-30,10 Q-32,-15 -20,-30 Q-5,-38 0,-35 Q5,-38 20,-30 Q32,-15 30,10" fill="url(#ww-hat)"/>
+    <path d="M-28,8 Q-30,-12 -18,-25 Q-5,-32 0,-30 Q5,-32 18,-25 Q30,-12 28,8" fill="#A08968" opacity="0.4"/>
+    <!-- Hat band -->
+    <path d="M-30,5 Q0,-2 30,5" fill="none" stroke="url(#ww-gold)" stroke-width="4"/>
+    <!-- Star badge -->
+    <polygon points="0,-5 3,3 12,3 5,8 7,17 0,12 -7,17 -5,8 -12,3 -3,3" fill="url(#ww-gold)" transform="translate(0, 0) scale(0.8)"/>
+  </g>
+  <!-- Revolvers -->
+  <g transform="translate(100, 220) rotate(-20)" filter="url(#ww-glow)" opacity="0.7">
+    <!-- Barrel -->
+    <rect x="0" y="-4" width="40" height="8" rx="2" fill="#888"/>
+    <rect x="35" y="-5" width="8" height="10" rx="1" fill="#666"/>
+    <!-- Cylinder -->
+    <rect x="-5" y="-6" width="12" height="12" rx="3" fill="#777"/>
+    <!-- Grip -->
+    <path d="M-5,6 L-12,25 L-4,28 L3,8" fill="#5C4033"/>
+    <!-- Trigger guard -->
+    <path d="M0,6 Q5,15 0,18 Q-5,15 0,6" fill="none" stroke="#888" stroke-width="1.5"/>
+  </g>
+  <g transform="translate(300, 220) rotate(20) scale(-1,1)" filter="url(#ww-glow)" opacity="0.7">
+    <rect x="0" y="-4" width="40" height="8" rx="2" fill="#888"/>
+    <rect x="35" y="-5" width="8" height="10" rx="1" fill="#666"/>
+    <rect x="-5" y="-6" width="12" height="12" rx="3" fill="#777"/>
+    <path d="M-5,6 L-12,25 L-4,28 L3,8" fill="#5C4033"/>
+    <path d="M0,6 Q5,15 0,18 Q-5,15 0,6" fill="none" stroke="#888" stroke-width="1.5"/>
+  </g>
+  <!-- Gold nuggets -->
+  <g filter="url(#ww-glow)" opacity="0.7">
+    <ellipse cx="170" cy="260" rx="10" ry="8" fill="url(#ww-gold)" transform="rotate(-10, 170, 260)"/>
+    <ellipse cx="230" cy="265" rx="8" ry="6" fill="url(#ww-gold)" transform="rotate(15, 230, 265)"/>
+    <ellipse cx="200" cy="270" rx="12" ry="9" fill="url(#ww-gold)" transform="rotate(5, 200, 270)"/>
+  </g>
+  <!-- Wanted poster hint -->
+  <g transform="translate(200, 260)" opacity="0.3">
+    <text text-anchor="middle" fill="#ffd700" font-size="12" font-weight="900" font-family="serif" letter-spacing="3">WANTED</text>
+  </g>
+</svg>

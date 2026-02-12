@@ -632,6 +632,22 @@ body {
     pointer-events: none;
 }
 
+.slot-img-banner {
+    padding: 0;
+}
+
+.slot-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.game-card:hover .slot-banner-img {
+    transform: scale(1.08);
+}
+
 .slots-banner { background: linear-gradient(135deg, #1a0a3e, #2d1b69); }
 .blackjack-banner { background: linear-gradient(135deg, #0a2e1a, #145a30); }
 .roulette-banner { background: linear-gradient(135deg, #2e0a0a, #5a1414); }

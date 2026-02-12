@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <defs>
+    <linearGradient id="pg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3d2b00"/>
+      <stop offset="50%" stop-color="#6b4c00"/>
+      <stop offset="100%" stop-color="#3d2b00"/>
+    </linearGradient>
+    <linearGradient id="pg-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="50%" stop-color="#ffec80"/>
+      <stop offset="100%" stop-color="#c8960c"/>
+    </linearGradient>
+    <linearGradient id="pg-blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a8cff"/>
+      <stop offset="100%" stop-color="#0055aa"/>
+    </linearGradient>
+    <filter id="pg-glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="pg-glow-sm">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="400" height="300" fill="url(#pg-bg)"/>
+  <!-- Sand particles -->
+  <circle cx="40" cy="60" r="1" fill="#ffd700" opacity="0.2"/>
+  <circle cx="360" cy="80" r="1.5" fill="#ffd700" opacity="0.15"/>
+  <circle cx="100" cy="270" r="1" fill="#ffd700" opacity="0.2"/>
+  <circle cx="300" cy="260" r="1" fill="#ffd700" opacity="0.15"/>
+  <!-- Pyramid background -->
+  <polygon points="200,40 320,220 80,220" fill="#8B7332" opacity="0.25" stroke="#c8960c" stroke-width="1" stroke-opacity="0.3"/>
+  <polygon points="200,40 200,220 80,220" fill="#9B8342" opacity="0.15"/>
+  <!-- Pharaoh mask center -->
+  <g transform="translate(200, 140)" filter="url(#pg-glow)">
+    <!-- Head -->
+    <ellipse cx="0" cy="-20" rx="35" ry="40" fill="url(#pg-gold)"/>
+    <!-- Headdress -->
+    <path d="M-35,-20 L-50,40 L-35,35 Z" fill="url(#pg-blue)"/>
+    <path d="M35,-20 L50,40 L35,35 Z" fill="url(#pg-blue)"/>
+    <rect x="-35" y="-62" width="70" height="12" rx="2" fill="url(#pg-gold)"/>
+    <!-- Headdress stripes -->
+    <line x1="-45" y1="0" x2="-50" y2="40" stroke="#ffd700" stroke-width="1.5" opacity="0.5"/>
+    <line x1="45" y1="0" x2="50" y2="40" stroke="#ffd700" stroke-width="1.5" opacity="0.5"/>
+    <!-- Face features -->
+    <ellipse cx="-12" cy="-25" rx="6" ry="4" fill="#1a1a00" opacity="0.8"/>
+    <ellipse cx="12" cy="-25" rx="6" ry="4" fill="#1a1a00" opacity="0.8"/>
+    <!-- Eye liner -->
+    <path d="M-20,-25 L-25,-22" stroke="#1a1a00" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M20,-25 L25,-22" stroke="#1a1a00" stroke-width="2" fill="none" opacity="0.6"/>
+    <!-- Nose -->
+    <path d="M0,-15 L-4,-5 L4,-5 Z" fill="#c8960c" opacity="0.5"/>
+    <!-- Mouth -->
+    <path d="M-8,5 Q0,12 8,5" stroke="#8B6914" stroke-width="2" fill="none"/>
+    <!-- Uraeus (cobra) -->
+    <path d="M0,-62 Q-5,-75 0,-80 Q5,-75 0,-62" fill="url(#pg-gold)" stroke="#c8960c" stroke-width="1"/>
+    <circle cx="0" cy="-80" r="3" fill="#ff4444"/>
+    <!-- Beard -->
+    <rect x="-4" y="15" width="8" height="25" rx="3" fill="url(#pg-gold)"/>
+  </g>
+  <!-- Ankh symbols -->
+  <g transform="translate(70, 140)" filter="url(#pg-glow-sm)" opacity="0.7">
+    <ellipse cx="0" cy="-15" rx="10" ry="14" fill="none" stroke="url(#pg-gold)" stroke-width="3"/>
+    <line x1="0" y1="-1" x2="0" y2="30" stroke="url(#pg-gold)" stroke-width="3"/>
+    <line x1="-12" y1="10" x2="12" y2="10" stroke="url(#pg-gold)" stroke-width="3"/>
+  </g>
+  <g transform="translate(330, 140)" filter="url(#pg-glow-sm)" opacity="0.7">
+    <ellipse cx="0" cy="-15" rx="10" ry="14" fill="none" stroke="url(#pg-gold)" stroke-width="3"/>
+    <line x1="0" y1="-1" x2="0" y2="30" stroke="url(#pg-gold)" stroke-width="3"/>
+    <line x1="-12" y1="10" x2="12" y2="10" stroke="url(#pg-gold)" stroke-width="3"/>
+  </g>
+  <!-- Scarab bottom -->
+  <g transform="translate(200, 250)" filter="url(#pg-glow-sm)" opacity="0.6">
+    <ellipse cx="0" cy="0" rx="18" ry="12" fill="url(#pg-blue)"/>
+    <ellipse cx="0" cy="0" rx="14" ry="8" fill="none" stroke="#ffd700" stroke-width="1"/>
+    <path d="M-18,0 Q-30,-10 -25,-18 Q-20,-10 -18,0" fill="url(#pg-gold)" opacity="0.8"/>
+    <path d="M18,0 Q30,-10 25,-18 Q20,-10 18,0" fill="url(#pg-gold)" opacity="0.8"/>
+  </g>
+</svg>
