@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Royal Flush Casino</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,7 +15,9 @@
     <div id="page-auth" class="auth-screen active">
         <div class="auth-bg"></div>
         <div class="auth-container">
-            <div class="auth-logo">ROYAL FLUSH</div>
+            <div class="auth-logo-wrap">
+                <img src="logo.svg" alt="Royal Flush Casino" class="auth-logo-img">
+            </div>
             <p class="auth-tagline">The premier online casino experience</p>
             <div class="auth-card">
                 <div class="auth-tabs">
@@ -22,35 +25,17 @@
                     <button class="auth-tab" onclick="showAuthTab('register')">Register</button>
                 </div>
                 <form id="form-login" class="auth-form" onsubmit="handleLogin(event)">
-                    <div class="input-group">
-                        <label>Username</label>
-                        <input type="text" id="login-username" placeholder="Enter username" required autocomplete="username">
-                    </div>
-                    <div class="input-group">
-                        <label>Password</label>
-                        <input type="password" id="login-password" placeholder="Enter password" required autocomplete="current-password">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                    <div class="input-group"><label>Username</label><input type="text" id="login-username" placeholder="Enter username" required autocomplete="username"></div>
+                    <div class="input-group"><label>Password</label><input type="password" id="login-password" placeholder="Enter password" required autocomplete="current-password"></div>
+                    <button type="submit" class="btn btn-accent btn-full">Sign In</button>
                     <p id="login-error" class="error-msg"></p>
                 </form>
                 <form id="form-register" class="auth-form hidden" onsubmit="handleRegister(event)">
-                    <div class="input-group">
-                        <label>Username</label>
-                        <input type="text" id="reg-username" placeholder="Choose a username" required autocomplete="username">
-                    </div>
-                    <div class="input-group">
-                        <label>Email</label>
-                        <input type="email" id="reg-email" placeholder="Enter email address" required autocomplete="email">
-                    </div>
-                    <div class="input-group">
-                        <label>Password</label>
-                        <input type="password" id="reg-password" placeholder="Create password" required autocomplete="new-password">
-                    </div>
-                    <div class="input-group">
-                        <label>Confirm Password</label>
-                        <input type="password" id="reg-confirm" placeholder="Repeat password" required autocomplete="new-password">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                    <div class="input-group"><label>Username</label><input type="text" id="reg-username" placeholder="Choose a username" required autocomplete="username"></div>
+                    <div class="input-group"><label>Email</label><input type="email" id="reg-email" placeholder="Enter email address" required autocomplete="email"></div>
+                    <div class="input-group"><label>Password</label><input type="password" id="reg-password" placeholder="Create password" required autocomplete="new-password"></div>
+                    <div class="input-group"><label>Confirm Password</label><input type="password" id="reg-confirm" placeholder="Repeat password" required autocomplete="new-password"></div>
+                    <button type="submit" class="btn btn-accent btn-full">Create Account</button>
                     <p id="reg-error" class="error-msg"></p>
                 </form>
             </div>
@@ -62,8 +47,7 @@
         <!-- Sidebar -->
         <aside id="sidebar" class="sidebar">
             <div class="sidebar-logo" onclick="navigate('lobby')">
-                <span class="logo-icon">RF</span>
-                <span class="logo-text">Royal Flush</span>
+                <img src="logo.svg" alt="Royal Flush" class="sidebar-logo-img">
             </div>
             <nav class="sidebar-nav">
                 <div class="nav-section-label">Menu</div>
@@ -71,11 +55,35 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                     <span>Lobby</span>
                 </a>
-                <div class="nav-section-label">Casino Games</div>
-                <a class="sidebar-link" data-page="slots" onclick="navigate('slots')">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="16" y1="4" x2="16" y2="20"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
-                    <span>Slots</span>
+                <div class="nav-section-label">Slots</div>
+                <a class="sidebar-link" data-page="slots" onclick="loadSlotGame('mega-fortune')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="16" y1="4" x2="16" y2="20"/></svg>
+                    <span>Mega Fortune</span>
+                    <span class="nav-tag hot">HOT</span>
                 </a>
+                <a class="sidebar-link" data-page="slots" onclick="loadSlotGame('pharaohs-gold')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <span>Pharaoh's Gold</span>
+                    <span class="nav-tag new">NEW</span>
+                </a>
+                <a class="sidebar-link" data-page="slots" onclick="loadSlotGame('cosmic-spins')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>
+                    <span>Cosmic Spins</span>
+                </a>
+                <a class="sidebar-link" data-page="slots" onclick="loadSlotGame('dragons-luck')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>Dragon's Luck</span>
+                </a>
+                <a class="sidebar-link" data-page="slots" onclick="loadSlotGame('wild-west-gold')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    <span>Wild West Gold</span>
+                </a>
+                <a class="sidebar-link" data-page="slots" onclick="loadSlotGame('neon-nights')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/></svg>
+                    <span>Neon Nights</span>
+                    <span class="nav-tag new">NEW</span>
+                </a>
+                <div class="nav-section-label">Casino Games</div>
                 <a class="sidebar-link" data-page="crash" onclick="navigate('crash')">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                     <span>Crash</span>
@@ -85,7 +93,7 @@
                     <span>Mines</span>
                 </a>
                 <a class="sidebar-link" data-page="plinko" onclick="navigate('plinko')">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4" r="2"/><line x1="12" y1="6" x2="12" y2="20"/><circle cx="7" cy="10" r="1.5"/><circle cx="17" cy="10" r="1.5"/><circle cx="5" cy="16" r="1.5"/><circle cx="19" cy="16" r="1.5"/></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4" r="2"/><line x1="12" y1="6" x2="12" y2="20"/><circle cx="7" cy="10" r="1.5"/><circle cx="17" cy="10" r="1.5"/></svg>
                     <span>Plinko</span>
                 </a>
                 <a class="sidebar-link" data-page="dice" onclick="navigate('dice')">
@@ -95,23 +103,19 @@
                 <div class="nav-section-label">Live Tables</div>
                 <a class="sidebar-link" data-page="blackjack" onclick="navigate('blackjack')">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="13" height="18" rx="2"/><path d="M9.5 8v8M6 12h7"/></svg>
-                    <span>Blackjack</span>
-                    <span class="live-dot"></span>
+                    <span>Blackjack</span><span class="live-dot"></span>
                 </a>
                 <a class="sidebar-link" data-page="roulette" onclick="navigate('roulette')">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
-                    <span>Roulette</span>
-                    <span class="live-dot"></span>
+                    <span>Roulette</span><span class="live-dot"></span>
                 </a>
                 <a class="sidebar-link" data-page="baccarat" onclick="navigate('baccarat')">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="8" height="12" rx="1"/><rect x="14" y="4" width="8" height="12" rx="1"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
-                    <span>Baccarat</span>
-                    <span class="live-dot"></span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="8" height="12" rx="1"/><rect x="14" y="4" width="8" height="12" rx="1"/></svg>
+                    <span>Baccarat</span><span class="live-dot"></span>
                 </a>
                 <a class="sidebar-link" data-page="poker" onclick="navigate('poker')">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="7" height="10" rx="1"/><rect x="8" y="3" width="7" height="10" rx="1"/><rect x="15" y="5" width="7" height="10" rx="1"/></svg>
-                    <span>Poker</span>
-                    <span class="live-dot"></span>
+                    <span>Poker</span><span class="live-dot"></span>
                 </a>
                 <div class="nav-section-label">Account</div>
                 <a class="sidebar-link" data-page="wallet" onclick="navigate('wallet')">
@@ -122,17 +126,13 @@
             <div class="sidebar-footer">
                 <div class="sidebar-user">
                     <div class="user-avatar" id="sidebar-avatar">?</div>
-                    <div class="user-info">
-                        <span id="sidebar-username" class="user-name">User</span>
-                        <span class="user-label">Player</span>
-                    </div>
+                    <div class="user-info"><span id="sidebar-username" class="user-name">User</span><span class="user-label">Player</span></div>
                 </div>
             </div>
         </aside>
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Top Bar -->
             <header class="topbar">
                 <button class="sidebar-toggle" onclick="toggleSidebar()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -149,58 +149,77 @@
                 </div>
             </header>
 
+            <!-- Stats Ticker -->
+            <div class="stats-ticker">
+                <div class="ticker-item"><span class="ticker-label">Players Online</span><span class="ticker-value" id="ticker-players">2,847</span></div>
+                <div class="ticker-sep"></div>
+                <div class="ticker-item"><span class="ticker-label">Total Paid Out</span><span class="ticker-value ticker-green">$12,847,392</span></div>
+                <div class="ticker-sep"></div>
+                <div class="ticker-item"><span class="ticker-label">Games Available</span><span class="ticker-value">15</span></div>
+                <div class="ticker-sep"></div>
+                <div class="ticker-item"><span class="ticker-label">Biggest Win Today</span><span class="ticker-value ticker-gold">$48,290</span></div>
+            </div>
+
             <!-- Page: Lobby -->
             <div id="page-lobby" class="page">
                 <div class="page-inner">
                     <div class="lobby-hero">
                         <div class="hero-content">
                             <h1>Welcome back, <span id="lobby-username">Player</span></h1>
-                            <p>Choose a game and start winning</p>
+                            <p>Choose from 15 games and start winning big</p>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="hero-stat"><span class="hero-stat-val ticker-green">$100</span><span class="hero-stat-label">Welcome Bonus</span></div>
+                            <div class="hero-stat"><span class="hero-stat-val">6</span><span class="hero-stat-label">Slot Themes</span></div>
+                            <div class="hero-stat"><span class="hero-stat-val">4</span><span class="hero-stat-label">Live Tables</span></div>
                         </div>
                     </div>
 
-                    <div class="section-header"><h2>Casino Games</h2><span class="badge">5 games</span></div>
+                    <!-- Featured Slots -->
+                    <div class="section-header"><h2>Slot Machines</h2><span class="badge">6 games</span><span class="badge hot-badge">POPULAR</span></div>
+                    <div class="game-grid slots-gallery">
+                        <div class="game-card" onclick="loadSlotGame('mega-fortune')">
+                            <div class="game-card-banner" style="background:linear-gradient(135deg, #1a0a3e, #2d1b69)"><div class="game-card-icon-wrap"><span class="slot-card-emoji">7</span></div><div class="game-card-tag hot-tag">HOT</div></div>
+                            <div class="game-card-body"><h3>Mega Fortune</h3><p>Classic luxury slots</p><div class="game-card-meta"><span class="meta-tag">20 Lines</span><span class="meta-tag accent">500x Max</span><span class="meta-tag players-tag">342 playing</span></div></div>
+                        </div>
+                        <div class="game-card" onclick="loadSlotGame('pharaohs-gold')">
+                            <div class="game-card-banner" style="background:linear-gradient(135deg, #3d2b00, #6b4c00)"><div class="game-card-icon-wrap"><span class="slot-card-emoji">\uD83C\uDFFA</span></div><div class="game-card-tag new-tag">NEW</div></div>
+                            <div class="game-card-body"><h3>Pharaoh's Gold</h3><p>Ancient Egyptian riches</p><div class="game-card-meta"><span class="meta-tag">High Vol.</span><span class="meta-tag accent">750x Max</span><span class="meta-tag players-tag">218 playing</span></div></div>
+                        </div>
+                        <div class="game-card" onclick="loadSlotGame('cosmic-spins')">
+                            <div class="game-card-banner" style="background:linear-gradient(135deg, #0a0025, #1a0a4e)"><div class="game-card-icon-wrap"><span class="slot-card-emoji">\uD83D\uDE80</span></div></div>
+                            <div class="game-card-body"><h3>Cosmic Spins</h3><p>Explore the galaxy</p><div class="game-card-meta"><span class="meta-tag">Medium</span><span class="meta-tag accent">600x Max</span><span class="meta-tag players-tag">156 playing</span></div></div>
+                        </div>
+                        <div class="game-card" onclick="loadSlotGame('dragons-luck')">
+                            <div class="game-card-banner" style="background:linear-gradient(135deg, #3d0000, #6b0000)"><div class="game-card-icon-wrap"><span class="slot-card-emoji">\uD83D\uDC32</span></div><div class="game-card-tag hot-tag">HOT</div></div>
+                            <div class="game-card-body"><h3>Dragon's Luck</h3><p>Legendary payouts</p><div class="game-card-meta"><span class="meta-tag">High Vol.</span><span class="meta-tag accent">888x Max</span><span class="meta-tag players-tag">429 playing</span></div></div>
+                        </div>
+                        <div class="game-card" onclick="loadSlotGame('wild-west-gold')">
+                            <div class="game-card-banner" style="background:linear-gradient(135deg, #3e2723, #5d4037)"><div class="game-card-icon-wrap"><span class="slot-card-emoji">\uD83E\uDE20</span></div></div>
+                            <div class="game-card-body"><h3>Wild West Gold</h3><p>Big bounty hunting</p><div class="game-card-meta"><span class="meta-tag">Med-High</span><span class="meta-tag accent">550x Max</span><span class="meta-tag players-tag">187 playing</span></div></div>
+                        </div>
+                        <div class="game-card" onclick="loadSlotGame('neon-nights')">
+                            <div class="game-card-banner" style="background:linear-gradient(135deg, #0d0d2b, #1a0533)"><div class="game-card-icon-wrap"><span class="slot-card-emoji">\uD83C\uDFB0</span></div><div class="game-card-tag new-tag">NEW</div></div>
+                            <div class="game-card-body"><h3>Neon Nights</h3><p>Vegas strip jackpots</p><div class="game-card-meta"><span class="meta-tag">Medium</span><span class="meta-tag accent">650x Max</span><span class="meta-tag players-tag">291 playing</span></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Casino Games -->
+                    <div class="section-header" style="margin-top:2rem"><h2>Casino Games</h2><span class="badge">4 games</span></div>
                     <div class="game-grid">
-                        <div class="game-card" onclick="navigate('slots')">
-                            <div class="game-card-banner slots-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="8" y1="4" x2="8" y2="20"/><line x1="16" y1="4" x2="16" y2="20"/></svg></div></div>
-                            <div class="game-card-body"><h3>Slots</h3><p>5-reel, 20 paylines with Wilds &amp; Free Spins</p><div class="game-card-meta"><span class="meta-tag">20 Lines</span><span class="meta-tag accent">Up to 500x</span></div></div>
-                        </div>
-                        <div class="game-card" onclick="navigate('crash')">
-                            <div class="game-card-banner crash-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div>
-                            <div class="game-card-body"><h3>Crash</h3><p>Cash out before the multiplier crashes</p><div class="game-card-meta"><span class="meta-tag">No Limit</span><span class="meta-tag accent">Unlimited</span></div></div>
-                        </div>
-                        <div class="game-card" onclick="navigate('mines')">
-                            <div class="game-card-banner mines-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><circle cx="15" cy="15" r="2"/></svg></div></div>
-                            <div class="game-card-body"><h3>Mines</h3><p>Find gems and avoid the mines</p><div class="game-card-meta"><span class="meta-tag">5x5 Grid</span><span class="meta-tag accent">High Risk</span></div></div>
-                        </div>
-                        <div class="game-card" onclick="navigate('plinko')">
-                            <div class="game-card-banner plinko-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="4" r="2"/><line x1="12" y1="6" x2="12" y2="22"/><circle cx="7" cy="11" r="1.5"/><circle cx="17" cy="11" r="1.5"/></svg></div></div>
-                            <div class="game-card-body"><h3>Plinko</h3><p>Drop the ball and hit big multipliers</p><div class="game-card-meta"><span class="meta-tag">3 Risks</span><span class="meta-tag accent">Up to 50x</span></div></div>
-                        </div>
-                        <div class="game-card" onclick="navigate('dice')">
-                            <div class="game-card-banner dice-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.5" fill="currentColor"/></svg></div></div>
-                            <div class="game-card-body"><h3>Dice</h3><p>Roll over or under your target number</p><div class="game-card-meta"><span class="meta-tag">Adjustable</span><span class="meta-tag accent">Up to 99x</span></div></div>
-                        </div>
+                        <div class="game-card" onclick="navigate('crash')"><div class="game-card-banner crash-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div><div class="game-card-body"><h3>Crash</h3><p>Cash out before the crash</p><div class="game-card-meta"><span class="meta-tag">No Limit</span><span class="meta-tag accent">Unlimited</span><span class="meta-tag players-tag">512 playing</span></div></div></div>
+                        <div class="game-card" onclick="navigate('mines')"><div class="game-card-banner mines-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><circle cx="15" cy="15" r="2"/></svg></div></div><div class="game-card-body"><h3>Mines</h3><p>Find gems, avoid mines</p><div class="game-card-meta"><span class="meta-tag">5x5 Grid</span><span class="meta-tag accent">High Risk</span><span class="meta-tag players-tag">234 playing</span></div></div></div>
+                        <div class="game-card" onclick="navigate('plinko')"><div class="game-card-banner plinko-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="4" r="2"/><line x1="12" y1="6" x2="12" y2="22"/><circle cx="7" cy="11" r="1.5"/><circle cx="17" cy="11" r="1.5"/></svg></div></div><div class="game-card-body"><h3>Plinko</h3><p>Drop for big multipliers</p><div class="game-card-meta"><span class="meta-tag">3 Risks</span><span class="meta-tag accent">Up to 50x</span><span class="meta-tag players-tag">178 playing</span></div></div></div>
+                        <div class="game-card" onclick="navigate('dice')"><div class="game-card-banner dice-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.5" fill="currentColor"/></svg></div></div><div class="game-card-body"><h3>Dice</h3><p>Roll over or under</p><div class="game-card-meta"><span class="meta-tag">Adjustable</span><span class="meta-tag accent">Up to 99x</span><span class="meta-tag players-tag">145 playing</span></div></div></div>
                     </div>
 
+                    <!-- Live Tables -->
                     <div class="section-header" style="margin-top:2rem"><h2>Live Tables</h2><span class="badge live-badge">LIVE</span></div>
                     <div class="game-grid">
-                        <div class="game-card" onclick="navigate('blackjack')">
-                            <div class="game-card-banner blackjack-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="13" height="18" rx="2"/><path d="M9.5 8v8M6 12h7"/></svg></div></div>
-                            <div class="game-card-body"><h3>Blackjack</h3><p>Beat the dealer to 21</p><div class="game-card-meta"><span class="meta-tag">No Limit</span><span class="meta-tag accent">3:2 Payout</span></div></div>
-                        </div>
-                        <div class="game-card" onclick="navigate('roulette')">
-                            <div class="game-card-banner roulette-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div></div>
-                            <div class="game-card-body"><h3>Roulette</h3><p>Place your bets and spin the wheel</p><div class="game-card-meta"><span class="meta-tag">European</span><span class="meta-tag accent">35x Straight</span></div></div>
-                        </div>
-                        <div class="game-card" onclick="navigate('baccarat')">
-                            <div class="game-card-banner baccarat-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="8" height="12" rx="1"/><rect x="14" y="4" width="8" height="12" rx="1"/></svg></div></div>
-                            <div class="game-card-body"><h3>Baccarat</h3><p>Player vs Banker — who will win?</p><div class="game-card-meta"><span class="meta-tag">6-Deck Shoe</span><span class="meta-tag accent">8:1 Tie</span></div></div>
-                        </div>
-                        <div class="game-card" onclick="navigate('poker')">
-                            <div class="game-card-banner poker-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="7" height="10" rx="1"/><rect x="8" y="3" width="7" height="10" rx="1"/><rect x="15" y="5" width="7" height="10" rx="1"/></svg></div></div>
-                            <div class="game-card-body"><h3>Three Card Poker</h3><p>Play or fold against the dealer</p><div class="game-card-meta"><span class="meta-tag">Ante Bonus</span><span class="meta-tag accent">40:1 SF</span></div></div>
-                        </div>
+                        <div class="game-card" onclick="navigate('blackjack')"><div class="game-card-banner blackjack-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="13" height="18" rx="2"/><path d="M9.5 8v8M6 12h7"/></svg></div><div class="game-card-tag live-tag-card">LIVE</div></div><div class="game-card-body"><h3>Blackjack</h3><p>Beat the dealer to 21</p><div class="game-card-meta"><span class="meta-tag">No Limit</span><span class="meta-tag accent">3:2 Payout</span><span class="meta-tag players-tag">623 playing</span></div></div></div>
+                        <div class="game-card" onclick="navigate('roulette')"><div class="game-card-banner roulette-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg></div><div class="game-card-tag live-tag-card">LIVE</div></div><div class="game-card-body"><h3>Roulette</h3><p>Spin the wheel</p><div class="game-card-meta"><span class="meta-tag">European</span><span class="meta-tag accent">35x Straight</span><span class="meta-tag players-tag">418 playing</span></div></div></div>
+                        <div class="game-card" onclick="navigate('baccarat')"><div class="game-card-banner baccarat-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="8" height="12" rx="1"/><rect x="14" y="4" width="8" height="12" rx="1"/></svg></div><div class="game-card-tag live-tag-card">LIVE</div></div><div class="game-card-body"><h3>Baccarat</h3><p>Player vs Banker</p><div class="game-card-meta"><span class="meta-tag">6-Deck</span><span class="meta-tag accent">8:1 Tie</span><span class="meta-tag players-tag">297 playing</span></div></div></div>
+                        <div class="game-card" onclick="navigate('poker')"><div class="game-card-banner poker-banner"><div class="game-card-icon-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="7" height="10" rx="1"/><rect x="8" y="3" width="7" height="10" rx="1"/><rect x="15" y="5" width="7" height="10" rx="1"/></svg></div><div class="game-card-tag live-tag-card">LIVE</div></div><div class="game-card-body"><h3>Three Card Poker</h3><p>Play or fold</p><div class="game-card-meta"><span class="meta-tag">Ante Bonus</span><span class="meta-tag accent">40:1 SF</span><span class="meta-tag players-tag">186 playing</span></div></div></div>
                     </div>
                 </div>
             </div>
@@ -210,33 +229,20 @@
                 <div class="page-inner">
                     <h2 class="page-heading">Wallet</h2>
                     <div class="wallet-grid">
-                        <div class="wallet-card balance-card">
-                            <div class="balance-label">Total Balance</div>
-                            <div id="wallet-balance" class="balance-value">$0.00</div>
-                            <div class="balance-sub">Available for play</div>
-                        </div>
-                        <div class="wallet-card">
-                            <h3>Deposit</h3>
-                            <div class="input-group"><label>Amount</label><div class="input-with-prefix"><span class="input-prefix">$</span><input type="number" id="deposit-amount" min="1" step="0.01" placeholder="0.00"></div></div>
-                            <div class="quick-chips"><button class="chip" onclick="setDeposit(10)">$10</button><button class="chip" onclick="setDeposit(25)">$25</button><button class="chip" onclick="setDeposit(50)">$50</button><button class="chip" onclick="setDeposit(100)">$100</button><button class="chip" onclick="setDeposit(500)">$500</button><button class="chip" onclick="setDeposit(1000)">$1K</button><button class="chip" onclick="setDeposit(10000)">$10K</button></div>
-                            <button class="btn btn-accent btn-full" onclick="deposit()">Deposit</button>
-                        </div>
-                        <div class="wallet-card">
-                            <h3>Withdraw</h3>
-                            <div class="input-group"><label>Amount</label><div class="input-with-prefix"><span class="input-prefix">$</span><input type="number" id="withdraw-amount" min="1" step="0.01" placeholder="0.00"></div></div>
-                            <button class="btn btn-primary btn-full" onclick="withdraw()">Withdraw</button>
-                        </div>
+                        <div class="wallet-card balance-card"><div class="balance-label">Total Balance</div><div id="wallet-balance" class="balance-value">$0.00</div><div class="balance-sub">Available for play</div></div>
+                        <div class="wallet-card"><h3>Deposit</h3><div class="input-group"><label>Amount</label><div class="input-with-prefix"><span class="input-prefix">$</span><input type="number" id="deposit-amount" min="1" step="0.01" placeholder="0.00"></div></div><div class="quick-chips"><button class="chip" onclick="setDeposit(10)">$10</button><button class="chip" onclick="setDeposit(25)">$25</button><button class="chip" onclick="setDeposit(50)">$50</button><button class="chip" onclick="setDeposit(100)">$100</button><button class="chip" onclick="setDeposit(500)">$500</button><button class="chip" onclick="setDeposit(1000)">$1K</button><button class="chip" onclick="setDeposit(10000)">$10K</button><button class="chip" onclick="setDeposit(100000)">$100K</button></div><button class="btn btn-accent btn-full" onclick="deposit()">Deposit</button></div>
+                        <div class="wallet-card"><h3>Withdraw</h3><div class="input-group"><label>Amount</label><div class="input-with-prefix"><span class="input-prefix">$</span><input type="number" id="withdraw-amount" min="1" step="0.01" placeholder="0.00"></div></div><button class="btn btn-primary btn-full" onclick="withdraw()">Withdraw</button></div>
                     </div>
                     <div class="card" style="margin-top:1.5rem"><h3 class="card-heading">Transaction History</h3><div id="transaction-list" class="transaction-list"><p class="empty-state">No transactions yet</p></div></div>
                 </div>
             </div>
 
-            <!-- Page: Slots -->
+            <!-- Page: Slots (shared for all themes) -->
             <div id="page-slots" class="page">
                 <div class="page-inner">
                     <div class="game-header">
                         <button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
-                        <h2>Slots</h2>
+                        <h2>Mega Fortune</h2>
                         <div id="free-spins-display" class="free-spins-badge hidden">Free Spins: 0</div>
                     </div>
                     <div class="game-layout">
@@ -245,34 +251,14 @@
                                 <div class="slots-display"><div id="slots-viewport" class="slots-viewport"></div></div>
                                 <div id="slots-result" class="result-bar"></div>
                                 <div class="game-controls slots-controls">
-                                    <div class="bet-control-group">
-                                        <label>Bet Per Line</label>
-                                        <div class="bet-input-row">
-                                            <button class="btn btn-ghost btn-icon" onclick="halveSlotBet()">&frac12;</button>
-                                            <div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="slot-bet-input" class="bet-input" value="1" min="0.01" step="0.01"></div>
-                                            <button class="btn btn-ghost btn-icon" onclick="doubleSlotBet()">2x</button>
-                                        </div>
-                                        <div class="bet-info"><span>20 Lines</span><span>Total: <strong id="slot-total-bet">$20.00</strong></span></div>
-                                    </div>
-                                    <div class="spin-buttons">
-                                        <button id="btn-spin" class="btn btn-accent btn-lg" onclick="spinSlots()">Spin</button>
-                                        <button id="btn-auto-spin" class="btn btn-outline btn-sm" onclick="toggleAutoSpin()">Auto</button>
-                                    </div>
+                                    <div class="bet-control-group"><label>Bet Per Line</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halveSlotBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="slot-bet-input" class="bet-input" value="1" min="0.01" step="0.01"></div><button class="btn btn-ghost btn-icon" onclick="doubleSlotBet()">2x</button></div><div class="bet-info"><span>20 Lines</span><span>Total: <strong id="slot-total-bet">$20.00</strong></span></div></div>
+                                    <div class="spin-buttons"><button id="btn-spin" class="btn btn-accent btn-lg" onclick="spinSlots()">Spin</button><button id="btn-auto-spin" class="btn btn-outline btn-sm" onclick="toggleAutoSpin()">Auto</button></div>
                                 </div>
                             </div>
                         </div>
                         <div class="game-sidebar">
-                            <div class="card">
-                                <h3 class="card-heading">Paytable</h3>
-                                <div class="paytable">
-                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#ffd700,#ff8c00)">W</span><span class="pt-label">WILD</span><span class="pt-payout">500x</span></div>
-                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#ff1744,#d50000)">7</span><span class="pt-label">Seven</span><span class="pt-payout">300x</span></div>
-                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#00e5ff,#0091ea)">&diams;</span><span class="pt-label">Diamond</span><span class="pt-payout">250x</span></div>
-                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#ffd740,#ff6f00)">&clubs;</span><span class="pt-label">Crown</span><span class="pt-payout">200x</span></div>
-                                    <div class="pt-row"><span class="pt-sym" style="background:linear-gradient(135deg,#e040fb,#7c4dff)">S</span><span class="pt-label">SCATTER</span><span class="pt-payout">Free Spins</span></div>
-                                </div>
-                                <div class="pt-note"><p>3+ Scatters = Free Spins (10/15/25)</p><p>WILD substitutes all except SCATTER</p></div>
-                            </div>
+                            <div class="card"><h3 class="card-heading">Paytable</h3><div id="slot-paytable" class="paytable"></div><div class="pt-note"><p>3+ Scatters = Free Spins (10/15/25)</p><p>WILD substitutes all except SCATTER</p></div></div>
+                            <div class="card" style="margin-top:0.75rem"><h3 class="card-heading">Game Info</h3><div id="slot-game-info" class="slot-game-info"></div></div>
                         </div>
                     </div>
                 </div>
@@ -281,16 +267,13 @@
             <!-- Page: Blackjack -->
             <div id="page-blackjack" class="page">
                 <div class="page-inner">
-                    <div class="game-header"><button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button><h2>Blackjack</h2><div></div></div>
+                    <div class="game-header"><button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button><h2>Blackjack <span class="live-tag">LIVE</span></h2><div></div></div>
                     <div class="card bj-table">
                         <div class="bj-area bj-dealer"><div class="bj-label">Dealer <span id="dealer-score" class="bj-score"></span></div><div id="dealer-hand" class="hand"></div></div>
                         <div class="bj-separator"></div>
                         <div class="bj-area bj-player"><div class="bj-label">You <span id="player-score" class="bj-score"></span></div><div id="player-hand" class="hand"></div></div>
                         <div id="bj-result" class="result-bar"></div>
-                        <div id="bj-bet-controls" class="game-controls">
-                            <div class="bet-control-group"><label>Bet Amount</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halveBjBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="bj-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setBjBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doubleBjBet()">2x</button></div></div>
-                            <button class="btn btn-accent btn-lg" onclick="startBlackjack()">Deal</button>
-                        </div>
+                        <div id="bj-bet-controls" class="game-controls"><div class="bet-control-group"><label>Bet Amount</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halveBjBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="bj-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setBjBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doubleBjBet()">2x</button></div></div><button class="btn btn-accent btn-lg" onclick="startBlackjack()">Deal</button></div>
                         <div id="bj-action-controls" class="game-controls hidden"><button class="btn btn-primary" onclick="bjHit()">Hit</button><button class="btn btn-primary" onclick="bjStand()">Stand</button><button id="btn-double" class="btn btn-outline" onclick="bjDouble()">Double</button></div>
                         <div id="bj-continue" class="game-controls hidden"><button class="btn btn-accent" onclick="resetBlackjack()">New Hand</button></div>
                     </div>
@@ -300,27 +283,17 @@
             <!-- Page: Roulette -->
             <div id="page-roulette" class="page">
                 <div class="page-inner">
-                    <div class="game-header"><button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button><h2>Roulette</h2><div></div></div>
+                    <div class="game-header"><button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button><h2>Roulette <span class="live-tag">LIVE</span></h2><div></div></div>
                     <div class="roulette-layout">
                         <div class="card roulette-main">
                             <div class="roulette-wheel-area"><div id="roulette-wheel" class="roulette-wheel"><div class="wheel-center"><span id="roulette-result-display" class="wheel-number"></span></div></div></div>
                             <div id="roulette-result" class="result-bar"></div>
                             <div class="roulette-board">
-                                <div class="board-top">
-                                    <div class="cell cell-zero" data-bet="0" onclick="placeBet(this)">0</div>
-                                    <div class="board-numbers">
-                                        <div class="cell cell-red" data-bet="3" onclick="placeBet(this)">3</div><div class="cell cell-blk" data-bet="6" onclick="placeBet(this)">6</div><div class="cell cell-red" data-bet="9" onclick="placeBet(this)">9</div><div class="cell cell-red" data-bet="12" onclick="placeBet(this)">12</div><div class="cell cell-blk" data-bet="15" onclick="placeBet(this)">15</div><div class="cell cell-red" data-bet="18" onclick="placeBet(this)">18</div><div class="cell cell-red" data-bet="21" onclick="placeBet(this)">21</div><div class="cell cell-blk" data-bet="24" onclick="placeBet(this)">24</div><div class="cell cell-red" data-bet="27" onclick="placeBet(this)">27</div><div class="cell cell-red" data-bet="30" onclick="placeBet(this)">30</div><div class="cell cell-blk" data-bet="33" onclick="placeBet(this)">33</div><div class="cell cell-red" data-bet="36" onclick="placeBet(this)">36</div><div class="cell cell-col" data-bet="col3" onclick="placeBet(this)">2:1</div>
-                                        <div class="cell cell-blk" data-bet="2" onclick="placeBet(this)">2</div><div class="cell cell-red" data-bet="5" onclick="placeBet(this)">5</div><div class="cell cell-blk" data-bet="8" onclick="placeBet(this)">8</div><div class="cell cell-blk" data-bet="11" onclick="placeBet(this)">11</div><div class="cell cell-red" data-bet="14" onclick="placeBet(this)">14</div><div class="cell cell-blk" data-bet="17" onclick="placeBet(this)">17</div><div class="cell cell-blk" data-bet="20" onclick="placeBet(this)">20</div><div class="cell cell-red" data-bet="23" onclick="placeBet(this)">23</div><div class="cell cell-blk" data-bet="26" onclick="placeBet(this)">26</div><div class="cell cell-blk" data-bet="29" onclick="placeBet(this)">29</div><div class="cell cell-red" data-bet="32" onclick="placeBet(this)">32</div><div class="cell cell-blk" data-bet="35" onclick="placeBet(this)">35</div><div class="cell cell-col" data-bet="col2" onclick="placeBet(this)">2:1</div>
-                                        <div class="cell cell-red" data-bet="1" onclick="placeBet(this)">1</div><div class="cell cell-blk" data-bet="4" onclick="placeBet(this)">4</div><div class="cell cell-red" data-bet="7" onclick="placeBet(this)">7</div><div class="cell cell-blk" data-bet="10" onclick="placeBet(this)">10</div><div class="cell cell-blk" data-bet="13" onclick="placeBet(this)">13</div><div class="cell cell-red" data-bet="16" onclick="placeBet(this)">16</div><div class="cell cell-red" data-bet="19" onclick="placeBet(this)">19</div><div class="cell cell-blk" data-bet="22" onclick="placeBet(this)">22</div><div class="cell cell-red" data-bet="25" onclick="placeBet(this)">25</div><div class="cell cell-blk" data-bet="28" onclick="placeBet(this)">28</div><div class="cell cell-blk" data-bet="31" onclick="placeBet(this)">31</div><div class="cell cell-red" data-bet="34" onclick="placeBet(this)">34</div><div class="cell cell-col" data-bet="col1" onclick="placeBet(this)">2:1</div>
-                                    </div>
-                                </div>
+                                <div class="board-top"><div class="cell cell-zero" data-bet="0" onclick="placeBet(this)">0</div><div class="board-numbers"><div class="cell cell-red" data-bet="3" onclick="placeBet(this)">3</div><div class="cell cell-blk" data-bet="6" onclick="placeBet(this)">6</div><div class="cell cell-red" data-bet="9" onclick="placeBet(this)">9</div><div class="cell cell-red" data-bet="12" onclick="placeBet(this)">12</div><div class="cell cell-blk" data-bet="15" onclick="placeBet(this)">15</div><div class="cell cell-red" data-bet="18" onclick="placeBet(this)">18</div><div class="cell cell-red" data-bet="21" onclick="placeBet(this)">21</div><div class="cell cell-blk" data-bet="24" onclick="placeBet(this)">24</div><div class="cell cell-red" data-bet="27" onclick="placeBet(this)">27</div><div class="cell cell-red" data-bet="30" onclick="placeBet(this)">30</div><div class="cell cell-blk" data-bet="33" onclick="placeBet(this)">33</div><div class="cell cell-red" data-bet="36" onclick="placeBet(this)">36</div><div class="cell cell-col" data-bet="col3" onclick="placeBet(this)">2:1</div><div class="cell cell-blk" data-bet="2" onclick="placeBet(this)">2</div><div class="cell cell-red" data-bet="5" onclick="placeBet(this)">5</div><div class="cell cell-blk" data-bet="8" onclick="placeBet(this)">8</div><div class="cell cell-blk" data-bet="11" onclick="placeBet(this)">11</div><div class="cell cell-red" data-bet="14" onclick="placeBet(this)">14</div><div class="cell cell-blk" data-bet="17" onclick="placeBet(this)">17</div><div class="cell cell-blk" data-bet="20" onclick="placeBet(this)">20</div><div class="cell cell-red" data-bet="23" onclick="placeBet(this)">23</div><div class="cell cell-blk" data-bet="26" onclick="placeBet(this)">26</div><div class="cell cell-blk" data-bet="29" onclick="placeBet(this)">29</div><div class="cell cell-red" data-bet="32" onclick="placeBet(this)">32</div><div class="cell cell-blk" data-bet="35" onclick="placeBet(this)">35</div><div class="cell cell-col" data-bet="col2" onclick="placeBet(this)">2:1</div><div class="cell cell-red" data-bet="1" onclick="placeBet(this)">1</div><div class="cell cell-blk" data-bet="4" onclick="placeBet(this)">4</div><div class="cell cell-red" data-bet="7" onclick="placeBet(this)">7</div><div class="cell cell-blk" data-bet="10" onclick="placeBet(this)">10</div><div class="cell cell-blk" data-bet="13" onclick="placeBet(this)">13</div><div class="cell cell-red" data-bet="16" onclick="placeBet(this)">16</div><div class="cell cell-red" data-bet="19" onclick="placeBet(this)">19</div><div class="cell cell-blk" data-bet="22" onclick="placeBet(this)">22</div><div class="cell cell-red" data-bet="25" onclick="placeBet(this)">25</div><div class="cell cell-blk" data-bet="28" onclick="placeBet(this)">28</div><div class="cell cell-blk" data-bet="31" onclick="placeBet(this)">31</div><div class="cell cell-red" data-bet="34" onclick="placeBet(this)">34</div><div class="cell cell-col" data-bet="col1" onclick="placeBet(this)">2:1</div></div></div>
                                 <div class="board-dozens"><div class="cell cell-out" data-bet="1st12" onclick="placeBet(this)">1st 12</div><div class="cell cell-out" data-bet="2nd12" onclick="placeBet(this)">2nd 12</div><div class="cell cell-out" data-bet="3rd12" onclick="placeBet(this)">3rd 12</div></div>
                                 <div class="board-outside"><div class="cell cell-out" data-bet="1-18" onclick="placeBet(this)">1-18</div><div class="cell cell-out" data-bet="even" onclick="placeBet(this)">Even</div><div class="cell cell-out cell-r" data-bet="red" onclick="placeBet(this)">Red</div><div class="cell cell-out cell-b" data-bet="black" onclick="placeBet(this)">Black</div><div class="cell cell-out" data-bet="odd" onclick="placeBet(this)">Odd</div><div class="cell cell-out" data-bet="19-36" onclick="placeBet(this)">19-36</div></div>
                             </div>
-                            <div class="roulette-controls">
-                                <div class="chip-selector"><label>Chip</label><div class="chip-options"><button class="chip-btn active" onclick="selectChip(1,this)">$1</button><button class="chip-btn" onclick="selectChip(5,this)">$5</button><button class="chip-btn" onclick="selectChip(25,this)">$25</button><button class="chip-btn" onclick="selectChip(100,this)">$100</button><button class="chip-btn" onclick="selectChip(500,this)">$500</button><button class="chip-btn" onclick="selectChip(1000,this)">$1K</button></div></div>
-                                <div class="roulette-actions"><div class="bet-total">Total: <strong id="roulette-total-bet">$0</strong></div><button class="btn btn-ghost btn-sm" onclick="clearBets()">Clear</button><button id="btn-roulette-spin" class="btn btn-accent btn-lg" onclick="spinRoulette()">Spin</button></div>
-                            </div>
+                            <div class="roulette-controls"><div class="chip-selector"><label>Chip</label><div class="chip-options"><button class="chip-btn active" onclick="selectChip(1,this)">$1</button><button class="chip-btn" onclick="selectChip(5,this)">$5</button><button class="chip-btn" onclick="selectChip(25,this)">$25</button><button class="chip-btn" onclick="selectChip(100,this)">$100</button><button class="chip-btn" onclick="selectChip(500,this)">$500</button><button class="chip-btn" onclick="selectChip(1000,this)">$1K</button></div></div><div class="roulette-actions"><div class="bet-total">Total: <strong id="roulette-total-bet">$0</strong></div><button class="btn btn-ghost btn-sm" onclick="clearBets()">Clear</button><button id="btn-roulette-spin" class="btn btn-accent btn-lg" onclick="spinRoulette()">Spin</button></div></div>
                         </div>
                     </div>
                 </div>
@@ -330,27 +303,7 @@
             <div id="page-crash" class="page">
                 <div class="page-inner">
                     <div class="game-header"><button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button><h2>Crash</h2><div></div></div>
-                    <div class="game-layout">
-                        <div class="game-main">
-                            <div class="card crash-card">
-                                <div class="crash-graph-container"><canvas id="crash-canvas" width="600" height="320"></canvas><div id="crash-multiplier" class="crash-multiplier">1.00x</div></div>
-                                <div id="crash-result" class="result-bar"></div>
-                                <div id="crash-bet-controls" class="crash-controls">
-                                    <div class="crash-inputs">
-                                        <div class="input-group"><label>Bet Amount</label><div class="input-with-prefix"><span class="input-prefix">$</span><input type="number" id="crash-bet" min="1" step="1" value="10"></div></div>
-                                        <div class="input-group"><label>Auto Cash Out</label><div class="input-with-prefix"><span class="input-prefix">x</span><input type="number" id="crash-auto" min="1.01" step="0.01" placeholder="Off"></div></div>
-                                    </div>
-                                    <button id="btn-crash" class="btn btn-accent btn-lg btn-full" onclick="startCrash()">Place Bet</button>
-                                </div>
-                                <div id="crash-cashout-controls" class="crash-controls hidden"><button id="btn-cashout" class="btn btn-cashout btn-lg btn-full" onclick="cashOut()">Cash Out <span id="cashout-amount"></span></button></div>
-                                <div id="crash-wait-controls" class="crash-controls hidden"><div class="crash-waiting">Waiting for next round...</div></div>
-                            </div>
-                        </div>
-                        <div class="game-sidebar">
-                            <div class="card"><h3 class="card-heading">History</h3><div id="crash-history" class="crash-history"></div></div>
-                            <div class="card" style="margin-top:0.75rem"><h3 class="card-heading">How to Play</h3><div class="crash-info"><p>1. Place your bet</p><p>2. The multiplier rises from 1.00x</p><p>3. Cash out before it crashes!</p><p>4. Set auto cash out for automatic wins</p></div></div>
-                        </div>
-                    </div>
+                    <div class="game-layout"><div class="game-main"><div class="card crash-card"><div class="crash-graph-container"><canvas id="crash-canvas" width="600" height="320"></canvas><div id="crash-multiplier" class="crash-multiplier">1.00x</div></div><div id="crash-result" class="result-bar"></div><div id="crash-bet-controls" class="crash-controls"><div class="crash-inputs"><div class="input-group"><label>Bet Amount</label><div class="input-with-prefix"><span class="input-prefix">$</span><input type="number" id="crash-bet" min="1" step="1" value="10"></div></div><div class="input-group"><label>Auto Cash Out</label><div class="input-with-prefix"><span class="input-prefix">x</span><input type="number" id="crash-auto" min="1.01" step="0.01" placeholder="Off"></div></div></div><button id="btn-crash" class="btn btn-accent btn-lg btn-full" onclick="startCrash()">Place Bet</button></div><div id="crash-cashout-controls" class="crash-controls hidden"><button id="btn-cashout" class="btn btn-cashout btn-lg btn-full" onclick="cashOut()">Cash Out <span id="cashout-amount"></span></button></div><div id="crash-wait-controls" class="crash-controls hidden"><div class="crash-waiting">Waiting for next round...</div></div></div></div><div class="game-sidebar"><div class="card"><h3 class="card-heading">History</h3><div id="crash-history" class="crash-history"></div></div><div class="card" style="margin-top:0.75rem"><h3 class="card-heading">How to Play</h3><div class="crash-info"><p>1. Place your bet</p><p>2. The multiplier rises from 1.00x</p><p>3. Cash out before it crashes!</p><p>4. Set auto cash out for automatic wins</p></div></div></div></div>
                 </div>
             </div>
 
@@ -358,31 +311,7 @@
             <div id="page-mines" class="page">
                 <div class="page-inner">
                     <div class="game-header"><button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button><h2>Mines</h2><div></div></div>
-                    <div class="game-layout">
-                        <div class="game-main">
-                            <div class="card mines-card">
-                                <div id="mines-grid" class="mines-grid"></div>
-                                <div id="mines-result" class="result-bar"></div>
-                                <div id="mines-bet-panel" class="mines-panel">
-                                    <div class="mines-settings">
-                                        <div class="bet-control-group"><label>Bet Amount</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halveMinesBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="mines-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setMinesBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doubleMinesBet()">2x</button></div></div>
-                                        <div class="bet-control-group"><label>Mines (1-24)</label><div class="bet-input-row"><div class="bet-input-wrap"><input type="number" id="mines-count-input" class="bet-input" value="5" min="1" max="24" step="1" onchange="setMinesCount(this.value)"></div></div></div>
-                                    </div>
-                                    <button class="btn btn-accent btn-lg btn-full" onclick="startMines()">Start Game</button>
-                                </div>
-                                <div id="mines-cashout-panel" class="mines-panel hidden">
-                                    <div class="mines-stats">
-                                        <div class="mines-stat"><span class="mines-stat-label">Gems</span><span id="mines-gems-count" class="mines-stat-value">0</span></div>
-                                        <div class="mines-stat"><span class="mines-stat-label">Multiplier</span><span id="mines-multiplier" class="mines-stat-value">1.00x</span></div>
-                                    </div>
-                                    <button class="btn btn-accent btn-lg btn-full" onclick="cashOutMines()">Cash Out <span id="mines-cashout-amount">$0.00</span></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="game-sidebar">
-                            <div class="card"><h3 class="card-heading">How to Play</h3><div class="crash-info"><p>1. Set your bet and number of mines</p><p>2. Click tiles to reveal gems</p><p>3. Each gem increases your multiplier</p><p>4. Hit a mine and you lose everything</p><p>5. Cash out anytime to keep your winnings</p></div></div>
-                        </div>
-                    </div>
+                    <div class="game-layout"><div class="game-main"><div class="card mines-card"><div id="mines-grid" class="mines-grid"></div><div id="mines-result" class="result-bar"></div><div id="mines-bet-panel" class="mines-panel"><div class="mines-settings"><div class="bet-control-group"><label>Bet Amount</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halveMinesBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="mines-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setMinesBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doubleMinesBet()">2x</button></div></div><div class="bet-control-group"><label>Mines (1-24)</label><div class="bet-input-row"><div class="bet-input-wrap"><input type="number" id="mines-count-input" class="bet-input" value="5" min="1" max="24" step="1" onchange="setMinesCount(this.value)"></div></div></div></div><button class="btn btn-accent btn-lg btn-full" onclick="startMines()">Start Game</button></div><div id="mines-cashout-panel" class="mines-panel hidden"><div class="mines-stats"><div class="mines-stat"><span class="mines-stat-label">Gems</span><span id="mines-gems-count" class="mines-stat-value">0</span></div><div class="mines-stat"><span class="mines-stat-label">Multiplier</span><span id="mines-multiplier" class="mines-stat-value">1.00x</span></div></div><button class="btn btn-accent btn-lg btn-full" onclick="cashOutMines()">Cash Out <span id="mines-cashout-amount">$0.00</span></button></div></div></div><div class="game-sidebar"><div class="card"><h3 class="card-heading">How to Play</h3><div class="crash-info"><p>1. Set your bet and number of mines</p><p>2. Click tiles to reveal gems</p><p>3. Each gem increases your multiplier</p><p>4. Hit a mine and you lose everything</p><p>5. Cash out anytime to keep your winnings</p></div></div></div></div>
                 </div>
             </div>
 
@@ -390,23 +319,7 @@
             <div id="page-plinko" class="page">
                 <div class="page-inner">
                     <div class="game-header"><button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button><h2>Plinko</h2><div></div></div>
-                    <div class="game-layout">
-                        <div class="game-main">
-                            <div class="card plinko-card">
-                                <div class="plinko-canvas-wrap"><canvas id="plinko-canvas" width="500" height="400"></canvas></div>
-                                <div id="plinko-multipliers" class="plinko-multipliers"></div>
-                                <div id="plinko-result" class="result-bar"></div>
-                                <div class="game-controls plinko-controls">
-                                    <div class="bet-control-group"><label>Bet Amount</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halvePlinkoBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="plinko-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setPlinkoBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doublePlinkoBet()">2x</button></div></div>
-                                    <div class="bet-control-group"><label>Risk</label><div class="plinko-risk-btns"><button class="plinko-risk-btn" onclick="setPlinkoRisk('low',this)">Low</button><button class="plinko-risk-btn active" onclick="setPlinkoRisk('medium',this)">Medium</button><button class="plinko-risk-btn" onclick="setPlinkoRisk('high',this)">High</button></div></div>
-                                    <button class="btn btn-accent btn-lg" onclick="dropPlinko()">Drop</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="game-sidebar">
-                            <div class="card"><h3 class="card-heading">How to Play</h3><div class="crash-info"><p>1. Set your bet and risk level</p><p>2. Drop the ball from the top</p><p>3. It bounces through pegs randomly</p><p>4. Land in a bucket for your multiplier</p><p>Higher risk = bigger potential wins</p></div></div>
-                        </div>
-                    </div>
+                    <div class="game-layout"><div class="game-main"><div class="card plinko-card"><div class="plinko-canvas-wrap"><canvas id="plinko-canvas" width="500" height="400"></canvas></div><div id="plinko-multipliers" class="plinko-multipliers"></div><div id="plinko-result" class="result-bar"></div><div class="game-controls plinko-controls"><div class="bet-control-group"><label>Bet Amount</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halvePlinkoBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="plinko-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setPlinkoBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doublePlinkoBet()">2x</button></div></div><div class="bet-control-group"><label>Risk</label><div class="plinko-risk-btns"><button class="plinko-risk-btn" onclick="setPlinkoRisk('low',this)">Low</button><button class="plinko-risk-btn active" onclick="setPlinkoRisk('medium',this)">Medium</button><button class="plinko-risk-btn" onclick="setPlinkoRisk('high',this)">High</button></div></div><button class="btn btn-accent btn-lg" onclick="dropPlinko()">Drop</button></div></div></div><div class="game-sidebar"><div class="card"><h3 class="card-heading">How to Play</h3><div class="crash-info"><p>1. Set your bet and risk level</p><p>2. Drop the ball from the top</p><p>3. It bounces through pegs randomly</p><p>4. Land in a bucket for your multiplier</p><p>Higher risk = bigger potential wins</p></div></div></div></div>
                 </div>
             </div>
 
@@ -414,29 +327,7 @@
             <div id="page-dice" class="page">
                 <div class="page-inner">
                     <div class="game-header"><button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button><h2>Dice</h2><div></div></div>
-                    <div class="card dice-card">
-                        <div class="dice-display">
-                            <div id="dice-roll-value" class="dice-roll-value">0.00</div>
-                        </div>
-                        <div class="dice-slider-container">
-                            <div class="dice-slider-track">
-                                <div id="dice-slider-fill" class="dice-slider-fill" style="left:50%;width:50%"></div>
-                            </div>
-                            <input type="range" id="dice-slider" class="dice-slider" min="1" max="98" step="0.5" value="50">
-                            <div class="dice-target-label">Target: <span id="dice-target-value">50.00</span></div>
-                        </div>
-                        <div class="dice-info-row">
-                            <div class="dice-info-item"><span class="dice-info-label">Multiplier</span><span id="dice-multiplier" class="dice-info-val">1.98x</span></div>
-                            <div class="dice-info-item"><button id="dice-mode-btn" class="btn btn-outline btn-sm" onclick="toggleDiceMode()">Roll Over</button></div>
-                            <div class="dice-info-item"><span class="dice-info-label">Win Chance</span><span id="dice-chance" class="dice-info-val">49.99%</span></div>
-                            <div class="dice-info-item"><span class="dice-info-label">Profit</span><span id="dice-profit" class="dice-info-val">$0.00</span></div>
-                        </div>
-                        <div id="dice-result" class="result-bar"></div>
-                        <div class="game-controls">
-                            <div class="bet-control-group"><label>Bet Amount</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halveDiceBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="dice-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setDiceBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doubleDiceBet()">2x</button></div></div>
-                            <button class="btn btn-accent btn-lg" onclick="rollDice()">Roll</button>
-                        </div>
-                    </div>
+                    <div class="card dice-card"><div class="dice-display"><div id="dice-roll-value" class="dice-roll-value">0.00</div></div><div class="dice-slider-container"><div class="dice-slider-track"><div id="dice-slider-fill" class="dice-slider-fill" style="left:50%;width:50%"></div></div><input type="range" id="dice-slider" class="dice-slider" min="1" max="98" step="0.5" value="50"><div class="dice-target-label">Target: <span id="dice-target-value">50.00</span></div></div><div class="dice-info-row"><div class="dice-info-item"><span class="dice-info-label">Multiplier</span><span id="dice-multiplier" class="dice-info-val">1.98x</span></div><div class="dice-info-item"><button id="dice-mode-btn" class="btn btn-outline btn-sm" onclick="toggleDiceMode()">Roll Over</button></div><div class="dice-info-item"><span class="dice-info-label">Win Chance</span><span id="dice-chance" class="dice-info-val">49.99%</span></div><div class="dice-info-item"><span class="dice-info-label">Profit</span><span id="dice-profit" class="dice-info-val">$0.00</span></div></div><div id="dice-result" class="result-bar"></div><div class="game-controls"><div class="bet-control-group"><label>Bet Amount</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halveDiceBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="dice-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setDiceBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doubleDiceBet()">2x</button></div></div><button class="btn btn-accent btn-lg" onclick="rollDice()">Roll</button></div></div>
                 </div>
             </div>
 
@@ -444,32 +335,7 @@
             <div id="page-baccarat" class="page">
                 <div class="page-inner">
                     <div class="game-header"><button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button><h2>Baccarat <span class="live-tag">LIVE</span></h2><div></div></div>
-                    <div class="card bac-table">
-                        <div class="bac-hands">
-                            <div class="bac-hand-area">
-                                <div class="bac-hand-label">Player <span id="bac-player-score" class="bj-score"></span></div>
-                                <div id="bac-player-hand" class="hand"></div>
-                            </div>
-                            <div class="bac-vs">VS</div>
-                            <div class="bac-hand-area">
-                                <div class="bac-hand-label">Banker <span id="bac-banker-score" class="bj-score"></span></div>
-                                <div id="bac-banker-hand" class="hand"></div>
-                            </div>
-                        </div>
-                        <div id="bac-result" class="result-bar"></div>
-                        <div id="bac-bet-controls">
-                            <div class="bac-bet-types">
-                                <button class="bac-type-btn active" onclick="setBacBetType('player',this)">Player <span class="bac-odds">1:1</span></button>
-                                <button class="bac-type-btn" onclick="setBacBetType('tie',this)">Tie <span class="bac-odds">8:1</span></button>
-                                <button class="bac-type-btn" onclick="setBacBetType('banker',this)">Banker <span class="bac-odds">0.95:1</span></button>
-                            </div>
-                            <div class="game-controls">
-                                <div class="bet-control-group"><label>Bet Amount</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halveBacBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="bac-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setBacBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doubleBacBet()">2x</button></div></div>
-                                <button class="btn btn-accent btn-lg" onclick="dealBaccarat()">Deal</button>
-                            </div>
-                        </div>
-                        <div id="bac-continue" class="game-controls hidden"><button class="btn btn-accent" onclick="resetBaccarat()">New Hand</button></div>
-                    </div>
+                    <div class="card bac-table"><div class="bac-hands"><div class="bac-hand-area"><div class="bac-hand-label">Player <span id="bac-player-score" class="bj-score"></span></div><div id="bac-player-hand" class="hand"></div></div><div class="bac-vs">VS</div><div class="bac-hand-area"><div class="bac-hand-label">Banker <span id="bac-banker-score" class="bj-score"></span></div><div id="bac-banker-hand" class="hand"></div></div></div><div id="bac-result" class="result-bar"></div><div id="bac-bet-controls"><div class="bac-bet-types"><button class="bac-type-btn active" onclick="setBacBetType('player',this)">Player <span class="bac-odds">1:1</span></button><button class="bac-type-btn" onclick="setBacBetType('tie',this)">Tie <span class="bac-odds">8:1</span></button><button class="bac-type-btn" onclick="setBacBetType('banker',this)">Banker <span class="bac-odds">0.95:1</span></button></div><div class="game-controls"><div class="bet-control-group"><label>Bet Amount</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halveBacBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="bac-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setBacBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doubleBacBet()">2x</button></div></div><button class="btn btn-accent btn-lg" onclick="dealBaccarat()">Deal</button></div></div><div id="bac-continue" class="game-controls hidden"><button class="btn btn-accent" onclick="resetBaccarat()">New Hand</button></div></div>
                 </div>
             </div>
 
@@ -477,40 +343,18 @@
             <div id="page-poker" class="page">
                 <div class="page-inner">
                     <div class="game-header"><button class="btn btn-ghost btn-sm" onclick="navigate('lobby')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button><h2>Three Card Poker <span class="live-tag">LIVE</span></h2><div></div></div>
-                    <div class="card poker-table">
-                        <div class="bac-hands">
-                            <div class="bac-hand-area">
-                                <div class="bac-hand-label">Dealer <span id="poker-dealer-eval" class="bj-score"></span></div>
-                                <div id="poker-dealer-hand" class="hand"></div>
-                            </div>
-                            <div class="bac-vs">VS</div>
-                            <div class="bac-hand-area">
-                                <div class="bac-hand-label">You <span id="poker-player-eval" class="bj-score"></span></div>
-                                <div id="poker-player-hand" class="hand"></div>
-                            </div>
-                        </div>
-                        <div id="poker-result" class="result-bar"></div>
-                        <div id="poker-bet-controls" class="game-controls">
-                            <div class="bet-control-group"><label>Ante Bet</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halvePokerBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="poker-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setPokerBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doublePokerBet()">2x</button></div></div>
-                            <button class="btn btn-accent btn-lg" onclick="dealPoker()">Deal</button>
-                        </div>
-                        <div id="poker-action-controls" class="game-controls hidden">
-                            <button class="btn btn-accent btn-lg" onclick="pokerPlay()">Play (Match Ante)</button>
-                            <button class="btn btn-outline" onclick="pokerFold()">Fold</button>
-                        </div>
-                        <div id="poker-continue" class="game-controls hidden"><button class="btn btn-accent" onclick="resetPoker()">New Hand</button></div>
-                    </div>
+                    <div class="card poker-table"><div class="bac-hands"><div class="bac-hand-area"><div class="bac-hand-label">Dealer <span id="poker-dealer-eval" class="bj-score"></span></div><div id="poker-dealer-hand" class="hand"></div></div><div class="bac-vs">VS</div><div class="bac-hand-area"><div class="bac-hand-label">You <span id="poker-player-eval" class="bj-score"></span></div><div id="poker-player-hand" class="hand"></div></div></div><div id="poker-result" class="result-bar"></div><div id="poker-bet-controls" class="game-controls"><div class="bet-control-group"><label>Ante Bet</label><div class="bet-input-row"><button class="btn btn-ghost btn-icon" onclick="halvePokerBet()">&frac12;</button><div class="bet-input-wrap"><span class="bet-prefix">$</span><input type="number" id="poker-bet-input" class="bet-input" value="10" min="1" step="1" onchange="setPokerBet(this.value)"></div><button class="btn btn-ghost btn-icon" onclick="doublePokerBet()">2x</button></div></div><button class="btn btn-accent btn-lg" onclick="dealPoker()">Deal</button></div><div id="poker-action-controls" class="game-controls hidden"><button class="btn btn-accent btn-lg" onclick="pokerPlay()">Play (Match Ante)</button><button class="btn btn-outline" onclick="pokerFold()">Fold</button></div><div id="poker-continue" class="game-controls hidden"><button class="btn btn-accent" onclick="resetPoker()">New Hand</button></div></div>
                 </div>
             </div>
 
         </main>
     </div>
 
-    <!-- Toast -->
     <div id="toast" class="toast"></div>
 
     <script src="js/app.js"></script>
     <script src="js/wallet.js"></script>
+    <script src="js/slot-themes.js"></script>
     <script src="js/slots.js"></script>
     <script src="js/blackjack.js"></script>
     <script src="js/roulette.js"></script>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 48" fill="none">
+  <defs>
+    <linearGradient id="gAcc" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1fff20"/>
+      <stop offset="100%" stop-color="#17c918"/>
+    </linearGradient>
+    <linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#ff8c00"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Card/Shield icon -->
+  <rect x="2" y="6" width="36" height="36" rx="6" fill="#0f212e" stroke="url(#gAcc)" stroke-width="2"/>
+  <!-- Spade suit -->
+  <path d="M20 14 c-6 6-10 10-10 14 a6 6 0 0 0 8.5 1.5 L20 32 l1.5-2.5 a6 6 0 0 0 8.5-1.5 c0-4-4-8-10-14z" fill="url(#gAcc)" filter="url(#glow)"/>
+  <rect x="18" y="30" width="4" height="6" rx="1" fill="url(#gAcc)"/>
+  <!-- Text: ROYAL FLUSH -->
+  <text x="48" y="22" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" letter-spacing="2" fill="#f5f6f7">ROYAL</text>
+  <text x="130" y="22" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" letter-spacing="2" fill="url(#gAcc)">FLUSH</text>
+  <!-- Subtitle -->
+  <text x="48" y="38" font-family="Inter, Arial, sans-serif" font-size="9" font-weight="600" letter-spacing="4" fill="#7a8a9e">ONLINE CASINO</text>
+</svg>
