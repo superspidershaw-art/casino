@@ -33,6 +33,15 @@ function getSlotSymbol(id) {
     return activeSlotTheme.symbols.find(s => s.id === id);
 }
 
+function renderSymbolHTML(sym) {
+    const content = sym.svg || `<span>${sym.icon}</span>`;
+    return `<div class="slot-symbol" style="background:${sym.bg}">${content}</div>`;
+}
+
+function renderPaytableIcon(sym) {
+    return sym.svg || sym.icon;
+}
+
 function buildSlotPool(theme) {
     const pool = [];
     for (const w of theme.weights) {
@@ -89,7 +98,7 @@ function renderSlotPaytable(theme) {
     container.innerHTML = topSymbols.map(sym => {
         const label = sym.isWild ? 'WILD' : (sym.isScatter ? 'SCATTER' : sym.label);
         const payoutText = sym.isScatter ? 'Free Spins' : sym.payout[4] + 'x';
-        return `<div class="pt-row"><span class="pt-sym" style="background:${sym.bg}">${sym.icon}</span><span class="pt-label">${label}</span><span class="pt-payout">${payoutText}</span></div>`;
+        return `<div class="pt-row"><span class="pt-sym" style="background:${sym.bg}">${renderPaytableIcon(sym)}</span><span class="pt-label">${label}</span><span class="pt-payout">${payoutText}</span></div>`;
     }).join('');
 }
 
@@ -123,7 +132,7 @@ function initSlotMachine() {
             const cell = document.createElement('div');
             cell.className = 'slot-cell';
             cell.id = `slot-${row}-${col}`;
-            cell.innerHTML = `<div class="slot-symbol" style="background:${defSym.bg}"><span>${defSym.icon}</span></div>`;
+            cell.innerHTML = renderSymbolHTML(defSym);
             reelCol.appendChild(cell);
         }
         viewport.appendChild(reelCol);
@@ -154,7 +163,7 @@ function spinSlots() {
         for (let row = 0; row < 3; row++) for (let col = 0; col < 5; col++) {
             const cell = document.getElementById(`slot-${row}-${col}`);
             const rSym = getSlotSymbol(randomSlotSymbolId());
-            cell.innerHTML = `<div class="slot-symbol" style="background:${rSym.bg}"><span>${rSym.icon}</span></div>`;
+            cell.innerHTML = renderSymbolHTML(rSym);
         }
     }, 60);
     [600, 900, 1200, 1500, 1800].forEach((delay, col) => {
@@ -162,7 +171,7 @@ function spinSlots() {
             for (let row = 0; row < 3; row++) {
                 const cell = document.getElementById(`slot-${row}-${col}`);
                 const sym = getSlotSymbol(grid[row][col]);
-                cell.innerHTML = `<div class="slot-symbol" style="background:${sym.bg}"><span>${sym.icon}</span></div>`;
+                cell.innerHTML = renderSymbolHTML(sym);
                 cell.classList.add('stopping');
             }
             reelCols[col].classList.remove('spinning');
